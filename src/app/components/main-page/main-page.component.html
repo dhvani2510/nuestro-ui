@@ -1,0 +1,152 @@
+<div class="main-content">
+  <div class="custom-container custom-bg custom-shadow d-flex justify-content-end pt-3 custom-styles pr-5">
+    <form>
+      <div class="input-group search">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="material-icons">search</i>
+          </span>
+        </div>
+        <input
+          type="text"
+          class="custom-input"
+          [(ngModel)]="search1"
+          [ngModelOptions]="{ standalone: true }"
+          placeholder="Search for category, title and more.."
+        />
+        <button type="button" class="custom-button" (click)="searchinput()">
+          Search
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="custom-container custom-bg">
+    <div class="d-flex justify-content-center">
+      <div *ngFor="let i of categoriess; let ind = index">
+        <div *ngIf="ind < 10">
+          <div class="categories text-uppercase custom-padding" (click)="search(i)">{{ i }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="custom-container">
+    <div class="row pt-5">
+      <div class="col-sm-9 custom-border-right">
+        <div class="custom-container">
+          <div class="head text-capitalize">Blogs from your followers</div>
+
+          <div *ngIf="followerBlogs.length == 0" class="text-center pt-5 pb-5 text-muted">
+            You have no blogs from your followers
+          </div>
+
+          <div *ngFor="let i of followerBlogs; let ind = index" class="custom-container custom-padding mt-5 mb-4 custom-border-bottom">
+            <div *ngIf="ind < 10" class="custom-container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <div class="text-muted text-uppercase category">{{ i.category }}</div>
+                  <div class="font-weight-bold title text-capitalize">
+                    <a [routerLink]="'/completeBlog/' + i.id" class="title">{{ i.title }}</a>
+                  </div>
+                  <div class="descrip pt-2">{{ i.blogDescription }}</div>
+                  <div class="text-muted text-capitalize mt-3">{{ i.date | date: "mediumDate" }}</div>
+                  <div class="mt-2">
+                    <a [routerLink]="'/profile/' + i.users.id"><i> - {{ i.users.username }}</i></a>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <img class="sizeimg custom-shadow" [src]="i.image" />
+                </div>
+              </div>
+              <div class="interaction-icons">
+                <i class="far fa-heart" (click)="likeBlog(followerBlogs, i.id)"></i> {{ i.likesCount }} Likes
+                <i class="far fa-comment" (click)="toggleCommentInput(followerBlogs,ind)"></i> {{ i.commentsCount }} Comments
+                <i class="far fa-share-square"></i> Share
+  
+                <div *ngIf="i.showCommentInput" class="comment-box">
+                  <input
+                    type="text"
+                    class="custom-input"
+                    placeholder="Add a comment..."
+                    [(ngModel)]="i.commentText"
+                  />
+                  <button class="send-button" (click)="commentBlog(followerBlogs,i.id, i.commentText)">Send</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="custom-container">
+          <div class="head text-capitalize">Check out other Blogs</div>
+
+          <div *ngFor="let i of blog; let ind = index" class="custom-container custom-padding mt-5 mb-4 custom-border-bottom">
+            <div *ngIf="ind < 10" class="custom-container">
+              <div class="row">
+                <div class="col-sm-8">
+                  <div class="text-muted text-uppercase category">{{ i.category }}</div>
+                  <div class="font-weight-bold title text-capitalize">
+                    <a [routerLink]="'/completeBlog/' + i.id" class="title">{{ i.title }}</a>
+                  </div>
+                  <div class="descrip pt-2">{{ i.content }}</div>
+                  <div class="text-muted text-capitalize mt-3">{{ i.date | date: "medium" }}</div>
+                  <div class="mt-2">
+                    <a [routerLink]="'/profile/' + i.author.id"><i> - {{ i.author.username }}</i></a>
+                  </div>
+                </div>
+              </div>
+              <div class="interaction-icons">
+                <i class="far fa-heart" (click)="likeBlog(blog, i.id)"></i> {{ i.likesCount }} Likes
+                <i class="far fa-comment" (click)="toggleCommentInput(blog,ind)"></i> {{ i.commentsCount }} Comments
+                <i class="far fa-share-square"></i> Share
+  
+                <div *ngIf="i.showCommentInput" class="comment-box">
+                  <input
+                    type="text"
+                    class="custom-input"
+                    placeholder="Add a comment..."
+                    [(ngModel)]="i.commentText"
+                  />
+                  <button class="send-button" (click)="commentBlog(blog,i.id, i.commentText)">Send</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="custom-container">
+          <div class="head text-center">Most Liked Blogs</div>
+          <div *ngFor="let i of popularBlog; let ind = index" class="custom-container custom-padding custom-border-bottom">
+            <div class="text-muted text-capitalize mt-3">{{ i.date | date: "mediumDate" }}</div>
+            <div class="mt-2">
+              <a [routerLink]="'/profile/' + i.author.id"><i> - {{ i.author.username }}</i></a>
+            </div>
+            <div class="text-muted text-uppercase category">{{ i.category }}</div>
+            <div class="title text-capitalize">
+              <a [routerLink]="'/completeBlog/' + i.id" class="title1">{{ i.title }}</a>
+            </div>
+            <div class="interaction-icons">
+              <i class="far fa-heart" (click)="likeBlog(popularBlog, i.id)"></i> {{ i.likesCount }} Likes
+              <i class="far fa-comment" (click)="toggleCommentInput(popularBlog,ind)"></i> {{ i.commentsCount }} Comments
+              <i class="far fa-share-square"></i> Share
+
+              <div *ngIf="i.showCommentInput" class="comment-box">
+                <input
+                  type="text"
+                  class="custom-input"
+                  placeholder="Add a comment..."
+                  [(ngModel)]="i.commentText"
+                />
+                <button class="send-button" (click)="commentBlog(popularBlog,i.id, i.commentText)">Send</button>
+              </div>
+            </div>
+            
+            <hr style="width: auto; height: 2px;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

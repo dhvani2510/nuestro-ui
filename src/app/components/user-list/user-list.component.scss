@@ -1,0 +1,59 @@
+// Variables for reusability
+$custom-font-size-text: 20px;
+$custom-font-size-heading: 30px;
+$custom-font-family: inherit;
+$custom-text-color: #666666;
+$custom-btn-bg: #000;
+$custom-btn-text-color: #fff;
+
+// Custom styles
+.custom-container {
+  padding: 3rem;
+  min-height: 70vh;
+}
+
+.custom-row {
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  // align-items: center;
+}
+
+.custom-header {
+  background-color: #f0f0f0;
+}
+
+.custom-heading {
+  font-size: $custom-font-size-heading;
+  font-family: $custom-font-family;
+}
+
+.custom-text {
+  text-align: center;
+  font-size: $custom-font-size-text;
+  font-family: $custom-font-family;
+}
+
+.custom-text-link {
+  text-align: center;
+  color: $custom-text-color;
+  text-decoration: none;
+}
+
+.custom-button {
+  text-align: center;
+}
+
+.custom-btn {
+  background-color: $custom-btn-bg;
+  color: $custom-btn-text-color;
+  border: none;
+  border-radius: 0;
+  padding: 0.5rem 1rem;
+  width: 100px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($custom-btn-bg, 10%);
+  }
+}

@@ -1,0 +1,19 @@
+/* Style for the app-navbar (Sticky Navbar) */
+app-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    /* Add other styles for your header as needed */
+  }
+  
+  /* Style for the router-outlet (Page Content) */
+  router-outlet {
+    flex-grow: 1; /* This makes the content section expand to fill available space */
+    padding: 20px; /* Add padding to separate content from the header and footer */
+  }
+  
+  /* Style for the app-footer */
+  app-footer {
+    /* Add styles for your footer as needed */
+  }
+  

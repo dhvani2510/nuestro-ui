@@ -1,0 +1,29 @@
+.heading {
+  font-size: 30px;
+  font-family: "Lato", sans-serif;
+  border-bottom: 3px solid #40bfc1;
+  color: #40bfc1;
+}
+textarea {
+  height: 600px;
+}
+
+.addbtn {
+  background-color: #40bfc1;
+  color: white;
+  width: 350px;
+}
+
+input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 2px solid #40bfc1;
+}
+input:focus {
+  outline: none;
+}
+.back
+{
+background: white
+;}

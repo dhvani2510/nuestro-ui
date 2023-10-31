@@ -1,0 +1,57 @@
+.cont {
+    height: 800px;
+   width: 100%;
+   /* background: linear-gradient(rgba(255,255,255,.8), rgba(255,255,255,.8)), url("../../assets/images/Back.png") no-repeat; */
+   background-size: cover;
+   }
+
+.text
+{
+    font-family: inherit;
+    font-size: 40px;
+    border-bottom: 3px solid white;
+}
+
+.text1
+{
+    font-family: inherit;
+    font-size: 30px;
+}
+
+.icon
+{
+    color:black;
+}
+.text2
+{
+    font-family: inherit;
+    font-size: 20px;
+}
+.link
+{
+    font-size: 24px;
+    font-family: inherit;
+    border-bottom: 1px solid gray;
+    text-decoration: none;
+    cursor: pointer;
+    color: black;
+}
+.link1
+{
+    padding-top : 100px;
+}
+.pad
+{
+    padding-top :80px;
+}
+.pad1
+{
+    padding-left : 100px;
+}
+.a:hover{
+cursor: pointer;
+}
+.btn1
+{
+    padding-left: 100px;
+}

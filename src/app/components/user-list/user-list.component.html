@@ -1,0 +1,31 @@
+<div class="container custom-container">
+  <div class="row custom-row custom-header">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-2 custom-heading">Name</div>
+    <div class="col-sm-3 custom-heading">UserName</div>
+    <div class="col-sm-4 custom-heading">Bio</div>
+    <div class="col-sm-2 custom-heading">Follow</div>
+  </div>
+  <div class="row custom-row border-bottom" *ngFor="let i of user; let ind = index">
+    <div class="col-sm-2 custom-text">{{ i.firstName }} {{ i.lastName }}</div>
+    <a class="col-sm-3 custom-text-link" href="/profile/{{ i.id }}">{{ i.username }}</a>
+    <div class="col-sm-4 custom-text">{{ i.bio }}</div>
+    <div class="col-sm-2">
+      <div class="custom-button" *ngIf="!superAccess">
+        <ng-container *ngIf="i.status; else followButton">
+          <div class="custom-text-field">{{ i.status }}</div>
+        </ng-container>
+        <ng-template #followButton>
+          <button
+            type="button"
+            class="custom-btn"
+            [id]="i.id"
+            (click)="follow(i.id)"
+          >
+            {{ i.status ? i.status : 'Follow' }}
+          </button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

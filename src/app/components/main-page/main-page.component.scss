@@ -1,0 +1,78 @@
+$base-font-family: inherit;
+
+.main-content {
+  position: relative;
+  top: 30px;
+  min-height: 70vh;
+  font-family: $base-font-family;
+}
+
+.custom-container {
+  padding: 1%;
+}
+
+.heading, .category, .title, .title1, .descrip, .descrip1, .head, .index {
+  font-family: $base-font-family;
+}
+
+.heading {
+  font-size: 28px;
+}
+
+.category, .categories {
+  font-size: 16px;
+  cursor: pointer;
+  color: #45969b;
+  &:hover {
+    color: black;
+  }
+}
+
+.title, .title1 {
+  font-size: 25px;
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+
+  &:hover {
+    color: #45969b;
+  }
+}
+
+.descrip {
+  font-size: 18px;
+}
+
+.descrip1 {
+  font-size: 15px;
+}
+
+.sizeimg {
+  height: 200px;
+  width: 200px;
+}
+
+.comment-icon::before {
+  content: "\f075"; // Font Awesome Comment icon
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  margin-right: 4px;
+}
+
+.share-icon::before {
+  content: "\f064"; // Font Awesome Share icon
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  margin-right: 4px;
+}
+
+.likes, .comments, .shares {
+  font-size: 14px;
+  margin-top: 8px;
+
+  .comment-icon::before,
+  .share-icon::before {
+    font-size: 16px;
+  }
+}

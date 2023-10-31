@@ -1,0 +1,46 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: black; /* Default background color for horizontal view */
+  color: white; /* Text color for a black background */
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+
+  @media (max-width: 768px) {
+    background-color: white; /* Background color for the drawer view */
+    color: black; /* Text color for a white background */
+  }
+
+  .logo {
+    font-size: 1rem;
+    color: inherit; /* Inherit text color from the parent element */
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+  }
+
+  .buttons {
+    display: flex; /* Display buttons in a single line */
+    align-items: center; /* Vertically center buttons */
+    
+    button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: inherit; /* Inherit text color from the parent element */
+      display: flex;
+      align-items: center;
+      margin-left: 1rem;
+
+      i {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}

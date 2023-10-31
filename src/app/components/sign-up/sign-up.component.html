@@ -1,0 +1,134 @@
+<div class="background1">
+  <div class="text-right p-3">
+    <abbr title="Go to Homepage">
+      <a href="/">
+        <i class="material-icons text-light icon">home</i>
+      </a>
+    </abbr>
+  </div>
+
+  <div class="custom-row">
+    <div class="custom-col">
+      <div class="text-center text-light heading font-weight-bold">
+        Nuestro
+      </div>
+      <div class="text-center text-light signup">SIGN UP</div>
+    </div>
+    <div class="custom-col pt-5">
+      <div class="custom-container size bg-light custom-scroll">
+        <form (ngSubmit)="onSubmit()" #signUpForm="ngForm">
+          <div class="custom-input-group mb-4 custom-input">
+            <input
+              type="text"
+              [(ngModel)]="firstName"
+              name="First Name"
+              class="custom-input-control required-field"
+              placeholder="First Name"
+              required
+            />
+          </div>
+
+          <div class="custom-input-group mb-4 custom-input">
+            <input
+              type="text"
+              [(ngModel)]="lastName"
+              name="Last Name"
+              class="custom-input-control"
+              placeholder="Last Name"
+              required
+            />
+          </div>
+
+          <div class="custom-input-group mb-4 mt-4 custom-input">
+            <input
+              type="text"
+              [(ngModel)]="username"
+              name="username"
+              class="custom-input-control"
+              placeholder="Username"
+              required
+              autocomplete="new-password"
+              pattern="^[a-zA-Z0-9@\-_.]*$"
+              (input)="validateUsername($event)"
+            />
+            <div *ngIf="isLoading" class="loader">Loading...</div>
+            <div *ngIf="username" class="validation-status">
+              <i *ngIf="usernameError" class="material-icons text-danger">error</i>
+              <i *ngIf="!isLoading && !usernameError" class="material-icons text-success">done</i>
+              <span
+                [ngClass]="{
+                  'text-danger': usernameError,
+                  'text-success': !isLoading && !usernameError
+                }"
+              >
+                {{ username && usernameError ? usernameError : 'Username is available' }}
+              </span>
+            </div>
+          </div>
+
+          <div class="custom-input-group mb-4 custom-input">
+            <input
+              type="email"
+              [(ngModel)]="email"
+              name="email"
+              class="custom-input-control"
+              placeholder="Email"
+              required
+            />
+            <div *ngIf="email && !isValidEmail(email)" class="error-message">
+              <i class="material-icons text-danger">error</i> Email is not in the correct format.
+            </div>
+          </div>
+
+          <div class="custom-input-group mb-4 custom-input">
+            <input
+              type="password"
+              [(ngModel)]="password"
+              name="password"
+              class="custom-input-control"
+              placeholder="Password"
+              required
+            />
+          </div>
+          <div class="custom-input-group mb-4 mt-4 custom-input">
+            <textarea
+              [(ngModel)]="bio"
+              name="bio"
+              class="custom-input-control"
+              placeholder="Bio"
+            ></textarea>
+          </div>
+          <div class="custom-input-group custom-btn-group">
+            <button class="custom-btn" [disabled]="!signUpForm.valid">Register</button>
+          </div>
+          <div class="custom-border-top pt-3">
+            <div class="text-center text-muted">
+              Don't have an account?
+              <a href="/login">Log In</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="custom-alert-popup" *ngIf="alert">
+  <div class="custom-popup-content success">
+   <i class="material-icons text-success">done</i>
+   <strong>Sign Up successful!</strong>
+   You can now log in to your account.
+  </div>
+</div>
+
+<!-- Custom Error Alert Popup -->
+<div class="custom-alert-popup" *ngIf="emailused">
+  <div class="custom-popup-content error">
+    <div>
+      <i class="material-icons text-danger">error</i>
+    <strong>Email or username already in use!</strong>
+    </div>
+    <button (click)="closeErrorAlert()" class="custom-close-button">Close</button>
+  </div>
+</div>

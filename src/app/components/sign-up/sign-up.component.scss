@@ -1,0 +1,196 @@
+.background1 {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/7923ce24293983.570a1fd8e5da3.jpg");
+  padding: 40px;
+
+  .text-right {
+    text-align: right;
+    padding: 15px;
+
+    a {
+      text-decoration: none;
+      color: #777;
+
+      .icon {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .custom-row {
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+
+    .custom-col {
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      font-weight: bold;
+      background: none; /* Remove background */
+
+      .heading {
+        font-size: 38px;
+      }
+
+      .signup {
+        font-size: 20px;
+      }
+    }
+
+    .required-field::before {
+      content: " *";
+      color: red;
+    }
+
+    .custom-col {
+      flex-grow: 1;
+      // background-color: #fff;
+
+      .custom-container {
+        background-color: #fff;
+        overflow-y: auto;
+        padding: 15px;
+        flex-grow: 1;
+
+        form {
+          padding: 15px;
+
+          .custom-input-group {
+            margin-bottom: 20px;
+            padding: 0 15px;
+
+            input,
+            textarea {
+              width: 100%;
+              padding: 10px;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+
+              &.is-invalid {
+                border-color: #dc3545;
+              }
+            }
+          }
+
+          .custom-btn {
+            background-color: #45969b;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            &:disabled {
+              opacity: 30%;
+            }
+          }
+
+          .custom-border-top {
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+            margin-top: 20px;
+            text-align: center;
+            color: #777;
+
+            a {
+              text-decoration: none;
+              color: #007BFF;
+            }
+          }
+
+          .custom-alert {
+            margin-top: 20px;
+            padding: 10px;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .custom-row {
+      flex-direction: column;
+    }
+  }
+}
+
+.loader {
+  display: none; /* Initially hide the loader */
+  color: #45969b; /* Choose the color you prefer */
+}
+
+.validation-status  {
+  display: flex;
+}
+.error-message {
+  color: red;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.error-message i {
+  margin-right: 5px;
+}
+
+/* Style for the background */
+.custom-alert-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Style for the popup content */
+.custom-popup-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+}
+
+/* Style for success popup */
+.custom-popup-content.success {
+  border: 2px solid #4CAF50;
+}
+
+/* Style for error popup */
+.custom-popup-content.error {
+  border: 2px solid #FF5733;
+}
+
+/* Style for icons */
+.material-icons {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+/* Style for the close button */
+.custom-close-button {
+  background: #45969b;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* Center the text in the button */
+.custom-close-button:focus {
+  outline: none;
+}

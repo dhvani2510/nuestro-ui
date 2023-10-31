@@ -1,0 +1,29 @@
+<div class="navbar">
+  <div class="logo" (click)="goToHome()">
+        <span>Nuestro</span>
+  </div>
+  <div class="buttons">
+    <ng-container *ngIf="!userLoggedIn; else userLinks">
+      <button (click)="navigateToLogin()">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </button>
+      <button (click)="navigateToSignup()">
+        <i class="fas fa-user-plus"></i> Signup
+      </button>
+    </ng-container>
+    <ng-template #userLinks>
+      <button (click)="showUsers()">
+        Show Users
+      </button>
+      <button (click)="blogPage()">
+        + Add Blog
+      </button>
+      <button (click)="navigateToProfile()">
+        <i class="fas fa-user"></i> {{ capitalizeFirstLetter(user.firstName) }}  {{ capitalizeFirstLetter(user.lastName) }}
+      </button>
+      <button (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </ng-template>
+  </div>
+</div>
