@@ -59,7 +59,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   goToHome() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/home']);
   }
 
   navigateToLogin() {
@@ -81,7 +81,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.userLoggedIn = false;
     localStorage.removeItem('token');
     this.authService.setToken("");
-    this.goToHome();
     this.router.navigate(['/']);
   }
 }

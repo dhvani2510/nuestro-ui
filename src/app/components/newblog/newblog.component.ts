@@ -39,11 +39,11 @@ export class NewblogComponent implements OnInit {
 
   ngOnInit() {  }
 
-  blogUrl = "http://localhost:8080/api/blogs/create";
+  blogUrl = "http://localhost:8081/api/v1/posts";
 
   submitForm() {
     const headers = this.authService.addHeaders();
-    this.submitted = true;    
+    this.submitted = true;
 
     if (this.blogForm.invalid) {
       this.error = 'Please fill in all the required fields.';
@@ -53,9 +53,7 @@ export class NewblogComponent implements OnInit {
     }
 
     const request = {
-      title: this.blog.title,
-      category: this.blog.category,
-      description: this.blog.content
+      content: this.blog.content
     };
 
     this.httpClient.post(this.blogUrl, request, { headers }).subscribe(res => {

@@ -18,7 +18,7 @@ class User {
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private apiUrl = 'http://localhost:8080/api/v1/auth';
+  private apiUrl = 'https://nuestro.iverique.com/api/v1/auth';
 
   private userLoggedInSubject = new BehaviorSubject<boolean>(false);
   userLoggedIn$ = this.userLoggedInSubject.asObservable();

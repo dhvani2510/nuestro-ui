@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  private apiUrl = 'http://localhost:8080/api/user';
+  private apiUrl = 'https://nuestro.iverique.com/api/v1/users';
   constructor(private http: HttpClient, private authService: AuthenticationService) {}
   private getHeaders(): HttpHeaders {
     let token = this.authService.getToken();

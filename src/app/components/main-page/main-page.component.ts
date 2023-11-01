@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
 import { AuthenticationService } from 'src/app/authentication.service';
 import { UserService } from 'src/app/user.service';
-import { retry } from 'rxjs';
 
 @Component({
   selector: 'app-main-page',
@@ -48,7 +46,7 @@ export class MainPageComponent implements OnInit {
   logoutUrl = 'http://localhost:10083/login/logout';
 
   async getBlogs() {
-    const url = 'http://localhost:8080/api/blogs/recent';
+    const url = 'http://localhost:8081/api/v1/posts';
     const headers = this.authService.addHeaders();
     this.httpClient.get(url, { headers }).subscribe((res: any) => {
       if(res.status == 200)  {
@@ -59,14 +57,16 @@ export class MainPageComponent implements OnInit {
   }
 
   async getPopular() {
-    const url = 'http://localhost:8080/api/blogs/popular';
+    const url = 'http://localhost:8081/api/v1/posts';
     const headers = this.authService.addHeaders();
 
     let result:any = await this.httpClient.get(url, { headers }).toPromise();
     console.log(result);
   
-    if(result.status == 200)  {
+    if(result.status == 200)  {      
       this.popularBlog = result.data;
+      console.log(this.popularBlog);
+
       this.popularBlog.forEach((blog) => {
         blog.showCommentInput = false;
       });    }

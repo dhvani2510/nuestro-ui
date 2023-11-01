@@ -5,38 +5,6 @@
   <div class="container mt-5">
     <form (ngSubmit)="submitForm()" #blogForm="ngForm">
       <div class="row">
-        <div class="col-sm-3">
-          <div class="form-group">
-            <input
-              type="text"
-              class="form-control rounded-0"
-              [ngClass]="{ 'is-invalid': submitted && blogForm.controls['title'].errors }"
-              placeholder="Title"
-              [(ngModel)]="blog.title"
-              name="title"
-              required
-            />
-            <div *ngIf="submitted && blogForm.controls['title'].errors && blogForm.controls['title'].dirty">
-              <div *ngIf="blogForm.controls['title'].hasError('required')">Title is required</div>
-            </div>
-          </div>
-          <div class="form-group">
-            <input
-              type="text"
-              class="form-control rounded-0"
-              [ngClass]="{ 'is-invalid': submitted && blogForm.controls['category'].errors }"
-              placeholder="Category"
-              [(ngModel)]="blog.category"
-              name="category" 
-            />
-            <div *ngIf="submitted && blogForm.controls['category'].errors" class="invalid-feedback">
-              <div *ngIf="blogForm.controls['category'].errors['required']">Category is required</div>
-            </div>
-          </div>
-          <div class="form-group d-flex justify-content-center pt-5">
-            <button class="btn addbtn" type="submit" [disabled]="blogForm.invalid">Add Blog</button>
-          </div>
-        </div>
         <div class="col-sm-9">
           <div class="form-group mb-5">
             <textarea
@@ -49,6 +17,9 @@
             ></textarea>
             <div *ngIf="submitted && blogForm.controls['content'].errors" class="invalid-feedback">
               <div *ngIf="blogForm.controls['content'].errors['required']">Content is required</div>
+            </div>
+            <div class="form-group d-flex justify-content-center pt-5">
+              <button class="btn addbtn" type="submit" [disabled]="blogForm.invalid">Add Blog</button>
             </div>
           </div>
         </div>
