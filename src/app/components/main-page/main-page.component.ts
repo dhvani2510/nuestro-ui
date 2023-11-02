@@ -43,10 +43,9 @@ export class MainPageComponent implements OnInit {
     this.router.navigate(['/createBlog']);
   }
 
-  logoutUrl = 'http://localhost:10083/login/logout';
-
   async getBlogs() {
     const url = 'http://localhost:8081/api/v1/posts';
+    // const url = 'https://nuestro.iverique.com/api/v1/posts';
     const headers = this.authService.addHeaders();
     this.httpClient.get(url, { headers }).subscribe((res: any) => {
       if(res.status == 200)  {

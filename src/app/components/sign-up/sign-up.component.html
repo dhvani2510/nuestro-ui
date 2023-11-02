@@ -39,33 +39,6 @@
             />
           </div>
 
-          <div class="custom-input-group mb-4 mt-4 custom-input">
-            <input
-              type="text"
-              [(ngModel)]="username"
-              name="username"
-              class="custom-input-control"
-              placeholder="Username"
-              required
-              autocomplete="new-password"
-              pattern="^[a-zA-Z0-9@\-_.]*$"
-              (input)="validateUsername($event)"
-            />
-            <div *ngIf="isLoading" class="loader">Loading...</div>
-            <div *ngIf="username" class="validation-status">
-              <i *ngIf="usernameError" class="material-icons text-danger">error</i>
-              <i *ngIf="!isLoading && !usernameError" class="material-icons text-success">done</i>
-              <span
-                [ngClass]="{
-                  'text-danger': usernameError,
-                  'text-success': !isLoading && !usernameError
-                }"
-              >
-                {{ username && usernameError ? usernameError : 'Username is available' }}
-              </span>
-            </div>
-          </div>
-
           <div class="custom-input-group mb-4 custom-input">
             <input
               type="email"
@@ -89,14 +62,6 @@
               placeholder="Password"
               required
             />
-          </div>
-          <div class="custom-input-group mb-4 mt-4 custom-input">
-            <textarea
-              [(ngModel)]="bio"
-              name="bio"
-              class="custom-input-control"
-              placeholder="Bio"
-            ></textarea>
           </div>
           <div class="custom-input-group custom-btn-group">
             <button class="custom-btn" [disabled]="!signUpForm.valid">Register</button>

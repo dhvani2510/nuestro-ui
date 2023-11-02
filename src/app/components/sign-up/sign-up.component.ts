@@ -15,10 +15,8 @@ export class SignUpComponent implements OnInit {
     this.signupForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      bio: ['']
     });
   }
 
@@ -27,10 +25,10 @@ export class SignUpComponent implements OnInit {
   phone: string = '';
   email: string = '';
   password: string = '';
-  username: string = '';
-  bio: string = '';
 
-  url = "http://localhost:8080/api/v1/auth/";
+  // url = "http://localhost:8081/api/v1/auth/";
+  url = "https://nuestro.iverique.com/api/v1/auth/";
+
 
   alert = false;
   usernameError: string = '';
@@ -47,28 +45,6 @@ export class SignUpComponent implements OnInit {
   }
   
 
-  async validateUsername(event:any) {
-    if(this.username != '')  {
-      const input = event.target.value;
-      const validInput = input.replace(/[^a-zA-Z0-9@\-_.]/g, '');
-      if (input !== validInput) {
-        // Display an error message or take appropriate action
-        event.target.value = validInput; // Set the input value to the valid value
-        this.username = validInput;
-      }
-      else  {
-        this.isLoading = true; // Show loader while validation is running
-        this.httpClient.get(this.url+'validate-username?username='+this.username).subscribe((res: any) => {
-          if (!res.data) {
-            this.usernameError = "Username is not available. Please choose another.";
-          } else {
-            this.usernameError = '';
-          }
-          this.isLoading = false
-        });
-      }
-    }
-  }
 
   validateForm() {
     console.log(this.signupForm.valid);
@@ -81,13 +57,11 @@ export class SignUpComponent implements OnInit {
     const json = {
       firstName: this.firstName,
       lastName: this.lastName,
-      username: this.username,
       password: this.password,
       email: this.email,
-      bio: this.bio,
     };
 
-    this.httpClient.post(this.url+'signup', json).subscribe(
+    this.httpClient.post(this.url+'register', json).subscribe(
       (res: any) => {
       console.log(res);
       if (res.status == 409) {

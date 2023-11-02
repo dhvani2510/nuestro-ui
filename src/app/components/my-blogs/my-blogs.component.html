@@ -1,9 +1,9 @@
 <div class="container-fluid cont" >
   <div class="container d-flex justify-content-between line">
       <div class=" font-weight-bold heading text-dark pt-5 pb-3">
-          My Blogs
+          My Posts
          </div>
-         <div class=" font-weight-bold heading text-dark pt-5 pb-3">Blogs-{{array.length}}</div>
+         <div class=" font-weight-bold heading text-dark pt-5 pb-3">Posts-{{array.length}}</div>
   </div>
  
 
@@ -12,7 +12,7 @@
           <div class="d-flex justify-content-center">
           </div>
           <div class="d-flex justify-content-center font-weight-bold text-light empty mt-5 error">
-            There are no blogs! 
+            There are no Posts! 
           </div>
           <div class="text-center mt-5">
               <button
@@ -20,7 +20,7 @@
           class="btn btn-info rounded-0 width borders"
           (click)="addBlog()"
         >
-          Add Blog
+          Add Post
         </button>
           </div>
         
@@ -62,7 +62,7 @@
                     class="btn btn-dark rounded-0 width borders"
                     href="/completeBlog/{{i.id}}"
                   >
-                    Show Complete Blog
+                    Show Complete Post
                 </a>
                 </div>
               </div>
@@ -73,7 +73,7 @@
                       class="btn btn-dark rounded-0 width borders"
                       href="/editblog/{{i.id}}"
                         >
-                      Update Blog
+                      Update Post
                   </a>
                   </div>
                 </div>
@@ -84,7 +84,7 @@
                     class="btn btn-dark rounded-0 width borders"
                     (click)="deleteBlog(i.id)"
                   >
-                    Delete Blog
+                    Delete Post
                   </button>
                 </div>
               </div>

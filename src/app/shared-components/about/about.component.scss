@@ -1,0 +1,86 @@
+.container {
+    margin-top: 20vh;
+    .about-component {
+  
+        .about-section {  
+          h1 {
+            font-size: 24px;
+            font-weight: bold;
+          }
+          p {
+            font-size: 16px;
+            line-height: 1.5;
+          }
+        }
+      
+        .mission-section {
+          h2 {
+            font-size: 20px;
+            font-weight: bold;
+          }
+      
+          p {
+            font-size: 16px;
+            line-height: 1.5;
+          }
+        }
+      
+        .offer-section {
+          h2 {
+            font-size: 20px;
+            font-weight: bold;
+          }
+      
+          p {
+            font-size: 16px;
+            line-height: 1.5;
+      
+            strong {
+              font-weight: bold;
+            }
+          }
+        }
+      
+        .team-section {
+          h2 {
+            font-size: 20px;
+            font-weight: bold;
+          }
+      
+          p {
+            font-size: 16px;
+            line-height: 1.5;
+          }
+        }
+      
+        .join-us-section {
+          h2 {
+            font-size: 20px;
+            font-weight: bold;
+          }
+      
+          p {
+            font-size: 16px;
+            line-height: 1.5;
+          }
+        }
+      
+        .connect-section {
+          h2 {
+            font-size: 20px;
+            font-weight: bold;
+          }
+      
+          p {
+            font-size: 16px;
+            line-height: 1.5;
+          }
+        }
+      }
+}
+
+  
+  .app-footer {
+    margin-top: 20px; // Adjust as needed.
+  }
+  

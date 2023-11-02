@@ -1,0 +1,20 @@
+.container {
+    margin-top: 10vh;
+    // Import your global styles or variables here if needed.
+
+.privacy-component {
+    margin-top: 20px; // Adjust as needed.
+  
+    .privacy-section {
+      h1 {
+        font-size: 24px;
+        font-weight: bold;
+      }
+  
+      p {
+        font-size: 16px;
+        line-height: 1.5;
+      }
+    }
+  }
+}

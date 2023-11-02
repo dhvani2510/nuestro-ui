@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// import { SignUpComponent } from './sign-up/sign-up.component';
-// import { LoginComponent } from './login/login.component';
 import { FrontPageComponent } from './components/front-page/front-page.component';
 import { FooterComponent } from './shared-components/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -21,14 +19,9 @@ import { MyprofileComponent } from './shared-components/myprofile/myprofile.comp
 import { MyBlogsComponent } from './components/my-blogs/my-blogs.component';
 import { CompleteBlogComponent } from './shared-components/complete-blog/complete-blog.component';
 import { EditBlogComponent } from './shared-components/edit-blog/edit-blog.component';
-// import { MainPageComponent } from './main-page/main-page.component';
-// import { MyprofileComponent } from './myprofile/myprofile.component';
-// import { NewblogComponent } from './newblog/newblog.component';
-// import { MyBlogsComponent } from './my-blogs/my-blogs.component';
-// import { EditBlogComponent } from './edit-blog/edit-blog.component';
-// import { CompleteBlogComponent } from './complete-blog/complete-blog.component';
-// import { FollowerListComponent } from './follower-list/follower-list.component';
-// import { UserListComponent } from './user-list/user-list.component';
+import { AboutComponent } from './shared-components/about/about.component';
+import { PrivacyComponent } from './shared-components/privacy/privacy.component';
+import { TermsAndConditionsComponent } from './shared-components/terms-and-conditions/terms-and-conditions.component';
 
 @NgModule({
   declarations: [
@@ -44,8 +37,10 @@ import { EditBlogComponent } from './shared-components/edit-blog/edit-blog.compo
     MyBlogsComponent,
     EditBlogComponent,
     CompleteBlogComponent,
-    // FollowerListComponent,
-    UserListComponent
+    UserListComponent,
+    AboutComponent,
+    PrivacyComponent,
+    TermsAndConditionsComponent
   ],
   imports: [
     BrowserModule,

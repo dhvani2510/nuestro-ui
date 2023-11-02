@@ -4,12 +4,13 @@ import { HttpClient } from "@angular/common/http";
 import { FormBuilder, Validators } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
 import { AuthenticationService } from 'src/app/authentication.service';
+import { UserService } from 'src/app/user.service';
 
 
 @Component({
   selector: 'app-myprofile',
   templateUrl: './myprofile.component.html',
-  styleUrls: ['./myprofile.component.css']
+  styleUrls: ['./myprofile.component.scss']
 })
 export class MyprofileComponent implements OnInit {
 
@@ -26,13 +27,23 @@ export class MyprofileComponent implements OnInit {
   bio: any;
   password: any;
   registerForm: any;
+  databaseForm: any;
   followersLength: any;
   requests: any;
   followingLength: any;
+
+  server:string='';
+  database:string='';
+  port:number=0;
+  databaseUsername:string='';
+  databasePassword:string='';
+  databaseType: string='';
+
   constructor( private router: Router,
     private route: ActivatedRoute,
     private httpClient: HttpClient,
     private service: AppService,
+    private userService:UserService,
     private authService: AuthenticationService,
     private formBuilder: FormBuilder) { 
       this.registerForm = this.formBuilder.group({
@@ -42,6 +53,14 @@ export class MyprofileComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       bio: ['']
+      });
+
+      this.databaseForm = this.formBuilder.group({
+        server: ['', Validators.required],
+      database: ['', Validators.required],
+      port: ['', Validators.required],
+      databaseUsername: ['', Validators.required],
+      databasePassword: ['', Validators.required],
       });
     }
     
@@ -55,21 +74,12 @@ export class MyprofileComponent implements OnInit {
       this.id=id? id : "";
     });
     this.getUserInfo(this.id);
-    console.log(sessionStorage.getItem("userId"));
-
-    if(sessionStorage.getItem("userId")==this.userId)
-    {
-      this.superAccess=true;
-    }
-    // this.getFollowers();
-    // this.getRequest();
-    // this.getFollowing();
   }
 
   getUserInfo(id: string){
     this.userId =id;
 
-    let user = this.authService.getUser();
+    let user:any = this.authService.getUser();
     if(user)  {
       this.username=user.username;
       this.firstName=user.firstName;
@@ -77,12 +87,37 @@ export class MyprofileComponent implements OnInit {
       this.email=user.email;
       this.bio=user.bio;
       this.password=user.password;
+      if(user.database)  {
+        this.server=user.database.server;
+        this.port=user.database.port;
+        this.databaseType=user.database.type;
+        this.databaseUsername=user.database.username;
+      }
     }
   }
 
   blogpage()
     {
       this.router.navigate(["/createBlog"]);
+    }
+
+
+    editDatabaseConnection()  {
+      let json = {
+        server:this.server,
+        database:this.database,
+        port:this.port.toString(),
+        username:this.databaseUsername,
+        password:this.databasePassword,
+        type:this.databaseType.toLocaleUpperCase()
+      };
+      console.log(json);
+      this.userService.editDatabase(json).subscribe(
+        (res:any) => {
+          console.log(res);
+          
+        }
+      );
     }
 
 

@@ -11,29 +11,26 @@ import { MyprofileComponent } from './shared-components/myprofile/myprofile.comp
 import { MyBlogsComponent } from './components/my-blogs/my-blogs.component';
 import { CompleteBlogComponent } from './shared-components/complete-blog/complete-blog.component';
 import { EditBlogComponent } from './shared-components/edit-blog/edit-blog.component';
-// import { LoginComponent } from './login/login.component';
-// import { SignUpComponent } from './sign-up/sign-up.component';
-// import { MyprofileComponent } from './myprofile/myprofile.component';
-// import { MainPageComponent } from './main-page/main-page.component';
-// import { NewblogComponent } from './newblog/newblog.component';
-// import { MyBlogsComponent } from './my-blogs/my-blogs.component';
-// import { EditBlogComponent } from './edit-blog/edit-blog.component';
-// import { CompleteBlogComponent } from './complete-blog/complete-blog.component';
+import { AboutComponent } from './shared-components/about/about.component';
+import { PrivacyComponent } from './shared-components/privacy/privacy.component';
+import { TermsAndConditionsComponent } from './shared-components/terms-and-conditions/terms-and-conditions.component';
 // import { FollowerListComponent } from './follower-list/follower-list.component';
-// import { UserListComponent } from './user-list/user-list.component';
 
 
 const routes: Routes = [
   {path : '' , component : FrontPageComponent},
  {path : 'login' , component : LoginComponent},
  {path : 'signup' , component : SignUpComponent},
- {path : 'profile/:id' , component : MyprofileComponent},
+ {path : 'profile/:id' , component : MyprofileComponent,canActivate:[AuthGuard]},
  {path : 'home' , component : MainPageComponent, canActivate:[AuthGuard]},
- {path : 'createBlog' , component : NewblogComponent},
- {path : 'userList' , component : UserListComponent},
- {path : 'myblogs/:id' , component : MyBlogsComponent},
- {path : 'editblog/:id' , component : EditBlogComponent},
- {path : 'completeBlog/:id' , component : CompleteBlogComponent},
+ {path : 'createBlog' , component : NewblogComponent,canActivate:[AuthGuard]},
+ {path : 'userList' , component : UserListComponent,canActivate:[AuthGuard]},
+ {path : 'myblogs/:id' , component : MyBlogsComponent,canActivate:[AuthGuard]},
+ {path : 'editblog/:id' , component : EditBlogComponent,canActivate:[AuthGuard]},
+ {path : 'completeBlog/:id' , component : CompleteBlogComponent,canActivate:[AuthGuard]},
+ {path : 'about' , component : AboutComponent},
+ {path : 'privacy' , component : PrivacyComponent},
+ {path:'terms-and-conditions',component:TermsAndConditionsComponent,canActivate:[AuthGuard]},
 //  {path : 'profile/followers/:id' , component :FollowerListComponent},
 
 
