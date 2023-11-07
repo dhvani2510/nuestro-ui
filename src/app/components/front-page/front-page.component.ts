@@ -29,9 +29,6 @@ export class FrontPageComponent implements OnInit {
   ngOnInit() {
     this.changeColor();
   }
-
-  logoutUrl = "http://localhost:10083/login/logout";
-
   changeColor() {
     window.setInterval(() => {
       if (this.hasColor == true) {

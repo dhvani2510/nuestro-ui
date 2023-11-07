@@ -82,26 +82,6 @@ export class LoginComponent implements OnInit {
       this.showPassword = "password";
     }
   }
-  url1 = "http://localhost:10083/login/logout";
-  logout()
-  {
-
-    if(confirm("you want to logout??"))
-    { if(this.service.checkLogin())
-      {
-        this.authService.logoutService();
-        this.httpClient.get(this.url1).subscribe(res=>
-          {
-              alert("Logout successful");
-          });
-       
-        this.router.navigate(["/home"]);
-      }}
-      else{
-        alert("ohk");
-      }
-   
-  }
 
   checkLogin() {
     return this.service.checkLogin();

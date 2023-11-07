@@ -29,7 +29,6 @@ export class MainPageComponent implements OnInit {
 
   async ngOnInit() {
     await this.getBlogs();
-    await this.getPopular();
     // this.getFollowerBlog();
     // this.getCategory();
   }
@@ -44,8 +43,8 @@ export class MainPageComponent implements OnInit {
   }
 
   async getBlogs() {
-    const url = 'http://localhost:8081/api/v1/posts';
-    // const url = 'https://nuestro.iverique.com/api/v1/posts';
+    // const url = 'http://localhost:8081/api/v1/posts';
+    const url = 'https://nuestro.iverique.com/api/v1/posts';
     const headers = this.authService.addHeaders();
     this.httpClient.get(url, { headers }).subscribe((res: any) => {
       if(res.status == 200)  {
@@ -53,22 +52,6 @@ export class MainPageComponent implements OnInit {
         console.log(this.blog);
       }
     });
-  }
-
-  async getPopular() {
-    const url = 'http://localhost:8081/api/v1/posts';
-    const headers = this.authService.addHeaders();
-
-    let result:any = await this.httpClient.get(url, { headers }).toPromise();
-    console.log(result);
-  
-    if(result.status == 200)  {      
-      this.popularBlog = result.data;
-      console.log(this.popularBlog);
-
-      this.popularBlog.forEach((blog) => {
-        blog.showCommentInput = false;
-      });    }
   }
 
   likeBlog(blogs:any[], id: any)  {
