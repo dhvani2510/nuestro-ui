@@ -23,7 +23,7 @@ const routes: Routes = [
  {path : 'signup' , component : SignUpComponent},
  {path : 'profile/:id' , component : MyprofileComponent,canActivate:[AuthGuard]},
  {path : 'home' , component : MainPageComponent, canActivate:[AuthGuard]},
- {path : 'createBlog' , component : NewblogComponent,canActivate:[AuthGuard]},
+ {path : 'createPost' , component : NewblogComponent,canActivate:[AuthGuard]},
  {path : 'userList' , component : UserListComponent,canActivate:[AuthGuard]},
  {path : 'myblogs/:id' , component : MyBlogsComponent,canActivate:[AuthGuard]},
  {path : 'editblog/:id' , component : EditBlogComponent,canActivate:[AuthGuard]},

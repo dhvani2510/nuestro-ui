@@ -39,7 +39,7 @@ export class NewblogComponent implements OnInit {
 
   ngOnInit() {  }
 
-  blogUrl = "http://localhost:8081/api/v1/posts";
+  blogUrl = "https://nuestro.iverique.com/api/v1/posts";
 
   submitForm() {
     const headers = this.authService.addHeaders();
@@ -58,7 +58,7 @@ export class NewblogComponent implements OnInit {
 
     this.httpClient.post(this.blogUrl, request, { headers }).subscribe(res => {
       console.log(res);
-      alert('SUCCESS!! :-)\nBlog added successfully!');
+      alert('SUCCESS!! :-)\nPost added successfully!');
     });
   }
 }
