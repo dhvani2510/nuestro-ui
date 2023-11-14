@@ -98,7 +98,7 @@ export class MyprofileComponent implements OnInit {
 
   blogpage()
     {
-      this.router.navigate(["/createBlog"]);
+      this.router.navigate(["/createPost"]);
     }
 
 
