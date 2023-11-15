@@ -123,13 +123,15 @@ export class MainPageComponent implements OnInit {
   }
 
   searchinput() {
-    const categoryUrl = `http://localhost:10083/blog/search/${this.search1}`;
+    const categoryUrl = `https://nuestro.iverique.com/api/v1/posts/search?keyword=${this.search1}`;
     const headers = this.authService.addHeaders();
 
     this.httpClient.get(categoryUrl, { headers }).subscribe((res: any) => {
-      this.blog = res;
-      this.followerBlogs = res;
-      console.log(this.blog);
+
+      if(res.status == 200)  {
+        this.blog = res.data;
+        console.log(this.blog);
+      }
     });
   }
 
