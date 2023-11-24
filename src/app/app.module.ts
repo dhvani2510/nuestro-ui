@@ -22,6 +22,7 @@ import { EditBlogComponent } from './shared-components/edit-blog/edit-blog.compo
 import { AboutComponent } from './shared-components/about/about.component';
 import { PrivacyComponent } from './shared-components/privacy/privacy.component';
 import { TermsAndConditionsComponent } from './shared-components/terms-and-conditions/terms-and-conditions.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { TermsAndConditionsComponent } from './shared-components/terms-and-condi
     HttpClientModule,
     ReactiveFormsModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

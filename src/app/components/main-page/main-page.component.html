@@ -36,36 +36,46 @@
 
         <div class="custom-container">
           <div class="head text-capitalize">Check out other Posts</div>
-
-          <div *ngFor="let i of blog; let ind = index" class="custom-container custom-padding mt-5 mb-4 custom-border-bottom">
-            <div *ngIf="ind < 10" class="custom-container">
-              <div class="row">
-                <div class="col">
-                  <!-- <div class="text-muted text-uppercase category">{{ i.category }}</div>
+       <div *ngFor="let i of blog; let ind = index"class="custom-container custom-padding mt-5 mb-4 custom-border-bottom">
+          <div *ngIf="ind < 10" class="custom-container">
+            <div class="row">
+              <div class="col">
+                <!-- <div class="text-muted text-uppercase category">{{ i.category }}</div>
                   <div class="font-weight-bold title text-capitalize">
                     <a [routerLink]="'/completeBlog/' + i.id" class="title">{{ i.title }}</a>
                   </div> -->
-                  <div class="descrip pt-2">{{ i.content }}</div>
-                  <!-- <div class="text-muted text-capitalize mt-3">{{ i.date | date: "medium" }}</div> -->
-                  <div class="mt-2">
-                    <a [routerLink]="'/profile/' + i.user"><i> - {{ i.user }}</i></a>
-                  </div>
+                <div class="descrip pt-2">{{ i.content }}</div>
+                <!-- <div class="text-muted text-capitalize mt-3">{{ i.date | date: "medium" }}</div> -->
+                <div class="mt-2">
+                  <a [routerLink]="'/profile/' + i.user"
+                    ><i> - {{ i.user }}</i></a
+                  >
                 </div>
               </div>
-              <div class="interaction-icons">
-                <i class="far fa-heart" (click)="likeBlog(blog, i.id)"></i> {{ i.likesCount }} Likes
-                <i class="far fa-comment" (click)="toggleCommentInput(blog,ind)"></i> {{ i.commentsCount }} Comments
-                <i class="far fa-share-square"></i> Share
-  
-                <div *ngIf="i.showCommentInput" class="comment-box">
-                  <input
-                    type="text"
-                    class="custom-input"
-                    placeholder="Add a comment..."
-                    [(ngModel)]="i.commentText"
-                  />
-                  <button class="send-button" (click)="commentBlog(blog,i.id, i.commentText)">Send</button>
-                </div>
+            </div>
+            <div class="interaction-icons">
+              <i class="far fa-heart" (click)="likeBlog(blog, i.id)"></i>
+              {{ i.likesCount }} Likes
+              <i
+                class="far fa-comment"
+                (click)="toggleCommentInput(blog, ind)"
+              ></i>
+              {{ i.commentsCount }} Comments
+              <i class="far fa-share-square"></i> Share
+
+              <div *ngIf="i.showCommentInput" class="comment-box">
+                <input
+                  type="text"
+                  class="custom-input"
+                  placeholder="Add a comment..."
+                  [(ngModel)]="i.commentText"
+                />
+                <button
+                  class="send-button"
+                  (click)="commentBlog(blog, i.id, i.commentText)"
+                >
+                  Send
+                </button>
               </div>
             </div>
           </div>
@@ -73,3 +83,4 @@
       </div>
     </div>
   </div>
+</div>

@@ -1,8 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router, ActivatedRoute } from '@angular/router';
-import { AppService } from '../../app.service';
-import { AuthenticationService } from '../../authentication.service';
+import { AuthenticationService } from '../../services/authentication.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -22,7 +21,7 @@ export class FrontPageComponent implements OnInit {
     }
   }
 
-  constructor(private httpClient: HttpClient, private router: Router, private route: ActivatedRoute, private service: AppService, private authService: AuthenticationService, private formBuilder: FormBuilder) {}
+  constructor(private httpClient: HttpClient, private router: Router, private route: ActivatedRoute, private authService: AuthenticationService, private formBuilder: FormBuilder) {}
 
   public hasColor = true;
 
@@ -52,7 +51,7 @@ export class FrontPageComponent implements OnInit {
   }
 
   checkLogin() {
-    return this.service.checkLogin();
+    return this.authService.checkLogin();
   }
 
   home() {

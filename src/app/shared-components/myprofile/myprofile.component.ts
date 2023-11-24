@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { FormBuilder, Validators } from '@angular/forms';
-import { AppService } from 'src/app/app.service';
-import { AuthenticationService } from 'src/app/authentication.service';
-import { UserService } from 'src/app/user.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -42,7 +41,6 @@ export class MyprofileComponent implements OnInit {
   constructor( private router: Router,
     private route: ActivatedRoute,
     private httpClient: HttpClient,
-    private service: AppService,
     private userService:UserService,
     private authService: AuthenticationService,
     private formBuilder: FormBuilder) { 
@@ -197,7 +195,7 @@ export class MyprofileComponent implements OnInit {
     {
   
       if(confirm("you want to logout??"))
-      { if(this.service.checkLogin())
+      { if(this.authService.checkLogin())
         {
           this.authService.logoutService();
           this.httpClient.get(this.logoutUrl).subscribe(res=>

@@ -1,9 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
-import { AppService } from "src/app/app.service";
-import { AuthenticationService } from "src/app/authentication.service";
-import { UserService } from "src/app/user.service";
+import { AuthenticationService } from "src/app/services/authentication.service";
+import { UserService } from "src/app/services/user.service";
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -15,7 +14,6 @@ export class LoginComponent implements OnInit {
   id:any;
   constructor(
     private httpClient: HttpClient,
-    private service: AppService,
     private router: Router,
     private authService: AuthenticationService,
     private userService: UserService
@@ -30,7 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.service.checkLogin()) {
+    if (this.authService.checkLogin()) {
       this.router.navigate(["/login"]);
     }
   }
@@ -45,7 +43,7 @@ export class LoginComponent implements OnInit {
       this.authService.authenticate(this.email, this.password).subscribe(
         data => {
           this.authService.setUserLoggedIn(true);          
-          this.service.isLoggedIn(true);
+          this.authService.isLoggedIn(true);
           console.log("login succesfull");
           this.getUser();
           this.router.navigate(["/home"]);
@@ -84,7 +82,7 @@ export class LoginComponent implements OnInit {
   }
 
   checkLogin() {
-    return this.service.checkLogin();
+    return this.authService.checkLogin();
   }
 
   red() {

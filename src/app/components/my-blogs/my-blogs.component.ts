@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AppService } from 'src/app/app.service';
-import { AuthenticationService } from 'src/app/authentication.service';
-import { BlogService } from 'src/app/blog.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { BlogService } from 'src/app/services/blog.service';
 
 @Component({
   selector: 'app-my-blogs',
@@ -15,6 +14,10 @@ export class MyBlogsComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   id:string='';
+  alert:boolean = false;
+  alertMessage:string= '';
+  alertHeader:string='';
+  success: boolean=false;
 
   blogUrl = 'http://localhost:8080/api/blogs/getNyBlog/';
   blogId:string='';
@@ -29,7 +32,6 @@ export class MyBlogsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private httpClient: HttpClient,
-    private service: AppService,
     private authService: AuthenticationService,
     private formBuilder: FormBuilder,
     private blogService: BlogService
@@ -77,18 +79,32 @@ export class MyBlogsComponent implements OnInit {
         this.title = element.title;
       });
     });
+    if(this.alert) {
+      this.alert = false;
+      this.alertHeader = '';
+      this.alertMessage = '';
+    }
   }
 
   deleteBlog(id:string) {
     if (confirm('Are you sure you want to delete the blog?')) {
       this.blogService.deleteBlog(id).subscribe((res:any) => {
-        console.log(res);
-        this.ajaxCall();
-        alert('blog deleted');
+        this.alert =true;
+        this.alertHeader="Success";
+        this.alertMessage="Blog deleted successfully";
+        this.success=true;
+        setTimeout(() => {
+          this.ajaxCall();
+        },5000)
       });
     } else {
-      alert('ohk');
-    }
+      this.success=false;
+      this.alert =true;
+      this.alertHeader="Error";
+      this.alertMessage="Something went Wrong!";
+      setTimeout(() => {
+        this.ajaxCall();
+      },5000)    }
   }
   addBlog() {
     this.router.navigate(['/createBlog']);

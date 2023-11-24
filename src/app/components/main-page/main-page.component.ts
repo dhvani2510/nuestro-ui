@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AppService } from 'src/app/app.service';
-import { AuthenticationService } from 'src/app/authentication.service';
-import { UserService } from 'src/app/user.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-main-page',
@@ -22,7 +21,6 @@ export class MainPageComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private httpClient: HttpClient,
-    private service: AppService,
     private authService: AuthenticationService,
     private userService: UserService
   ) {}

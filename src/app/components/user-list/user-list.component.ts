@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { FormBuilder } from '@angular/forms';
-import { AppService } from 'src/app/app.service';
-import { AuthenticationService } from 'src/app/authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-user-list',
@@ -16,7 +15,6 @@ export class UserListComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private httpClient: HttpClient,
-    private service: AppService,
     private authService: AuthenticationService,
     private formBuilder: FormBuilder
   ) { }

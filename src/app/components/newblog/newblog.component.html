@@ -27,3 +27,13 @@
     </form>
   </div>
 </div>
+<div class="custom-alert-popup" *ngIf="alert" (click)="closeAlert()">
+  <div class="custom-popup-content" [ngClass]="success ? 'success' : 'error'">
+    <i class="material-icons close close-icon" (click)="closeAlert()">cross</i>
+    <strong>{{alertHeader}}</strong>
+    <div>
+      {{alertMessage}}
+    </div>
+  </div>
+</div>
+

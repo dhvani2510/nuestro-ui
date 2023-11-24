@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../authentication.service';
+import { AuthenticationService } from '../../services/authentication.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -77,10 +77,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    // Implement logout logic here and set userLoggedIn to false
-    this.userLoggedIn = false;
-    localStorage.removeItem('token');
-    this.authService.setToken("");
+    this.authService.logoutService();
+
     this.router.navigate(['/']);
   }
 }

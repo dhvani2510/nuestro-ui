@@ -8,6 +8,7 @@ import { AuthenticationService } from './authentication.service';
 })
 export class BlogService {
   
+  // private apiUrl = 'http://localhost:8081/api/v1/posts/';
   private apiUrl = 'https://nuestro.iverique.com/api/v1/posts/';
   constructor(private http: HttpClient, private authService: AuthenticationService) {}
   private getHeaders(): HttpHeaders {

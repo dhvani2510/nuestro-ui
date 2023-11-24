@@ -18,6 +18,7 @@ class User {
   providedIn: 'root'
 })
 export class AuthenticationService {
+  // private apiUrl = 'http://localhost:8081/api/v1/auth';
   private apiUrl = 'https://nuestro.iverique.com/api/v1/auth';
 
   private userLoggedInSubject = new BehaviorSubject<boolean>(false);
@@ -68,7 +69,6 @@ export class AuthenticationService {
     return this.http.post(url, { email, password }).pipe(
           map ((data:any) => {
               localStorage.setItem('token',data.data.token);
-              // set the token to be used in headers for all requests
               this.tokenSubject.next(localStorage.getItem('token'));              
           }
       ));
@@ -80,6 +80,7 @@ export class AuthenticationService {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.setUserLoggedIn(false);
+    
   }  
 
   setToken(token: string | null): void {    
@@ -87,8 +88,6 @@ export class AuthenticationService {
 
     if (token) {
       localStorage.setItem('token', token);
-    } else {
-      localStorage.removeItem('token');
     }
   }
 
@@ -101,4 +100,21 @@ export class AuthenticationService {
   getToken() {
     return this.tokenSubject.getValue();
   }
+  
+  isLoggedIn(bool: boolean) {
+
+    localStorage.setItem('auth', String(bool));
+    return bool;
+
+  }
+  checkLogin() {
+    const auth = localStorage.getItem('token');
+    if (auth) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 }
+

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
-import { AppService } from 'src/app/app.service';
-import { AuthenticationService } from 'src/app/authentication.service';
-import { BlogService } from 'src/app/blog.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { BlogService } from 'src/app/services/blog.service';
 
 @Component({
   selector: 'app-complete-blog',
@@ -17,7 +16,6 @@ export class CompleteBlogComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private httpClient: HttpClient,
-    private service: AppService,
     private authService: AuthenticationService,
     private blogService:BlogService
   ) { }

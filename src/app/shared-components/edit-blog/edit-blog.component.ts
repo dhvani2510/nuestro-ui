@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from "@angular/router";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AppService } from 'src/app/app.service';
-import { AuthenticationService } from 'src/app/authentication.service';
-import { BlogService } from 'src/app/blog.service';
+import { BlogService } from 'src/app/services/blog.service';
 
 @Component({
   selector: 'app-edit-blog',

@@ -26,8 +26,8 @@ export class SignUpComponent implements OnInit {
   email: string = '';
   password: string = '';
 
-  // url = "http://localhost:8081/api/v1/auth/";
-  url = "https://nuestro.iverique.com/api/v1/auth/";
+  url = "http://localhost:8081/api/v1/auth/";
+  // url = "https://nuestro.iverique.com/api/v1/auth/";
 
 
   alert = false;

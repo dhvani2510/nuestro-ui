@@ -95,3 +95,13 @@
     </div>
   </div>
 </div>
+
+<div class="custom-alert-popup" *ngIf="alert">
+  <div class="custom-popup-content" [ngClass]="success? 'success': 'error'">
+   <i class="material-icons" [ngClass]="success? 'success': 'error'"></i>
+   <strong>{{alertHeader}}</strong>
+   <div>
+    {{alertMessage}}
+  </div>
+  </div>
+</div>
