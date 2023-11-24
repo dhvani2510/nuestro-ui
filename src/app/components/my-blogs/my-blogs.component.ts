@@ -107,6 +107,6 @@ export class MyBlogsComponent implements OnInit {
       },5000)    }
   }
   addBlog() {
-    this.router.navigate(['/createBlog']);
+    this.router.navigate(['/createPost']);
   }
 }

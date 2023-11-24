@@ -41,7 +41,7 @@ export class NewblogComponent implements OnInit {
 
   ngOnInit() {  }
 
-  blogUrl = "http://localhost:8081/api/v1/posts";
+  blogUrl = "https://nuestro.iverique.com/api/v1/posts";
 
   submitForm() {
     const headers = this.authService.addHeaders();

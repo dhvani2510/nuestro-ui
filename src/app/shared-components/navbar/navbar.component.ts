@@ -44,7 +44,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
   
   blogPage() {
-    this.router.navigate(["/createBlog"]);
+    this.router.navigate(["/createPost"]);
   }
 
   ngOnInit() {  
