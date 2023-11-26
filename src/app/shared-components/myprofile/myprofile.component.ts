@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -13,13 +13,6 @@ import { BlogService } from 'src/app/services/blog.service';
   styleUrls: ['./myprofile.component.scss'],
 })
 export class MyprofileComponent implements OnInit {
-
-  @ViewChild('myModal') myModal: ElementRef;
-
-  openModal() {
-    this.modalService.open(this.myModal, { centered: true });
-  }
-
   submitted = false;
   id: string = '';
   userId: string = '';
@@ -55,8 +48,7 @@ export class MyprofileComponent implements OnInit {
     private httpClient: HttpClient,
     private userService: UserService,
     private authService: AuthenticationService,
-    private formBuilder: FormBuilder,
-    private modalService: NgbModal
+    private formBuilder: FormBuilder
   ) {
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
