@@ -33,7 +33,7 @@
                   ><i>{{ i.user.firstName }} {{ i.user.lastName }}</i></a
                 >
               </div>
-              <div class="descrip pt-2">{{ i.content }}</div>
+              <div class="descrip pt-2 " [innerHTML]="i.content.replaceAll('\n','\<br>')"></div>
             </div>
           </div>
           <div class="interaction-icons">

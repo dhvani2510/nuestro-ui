@@ -121,10 +121,9 @@
                 name="email"
                 class="custom-input-control"
                 placeholder="Email"
-                required
+                disabled="true"
               />
             </div>
-            <a data-toggle="modal" data-target="#myModal1"> change Password </a>
             <div class="form-group d-flex justify-content-center">
               <button class="btn addbtn">Save Changes</button>
             </div>
@@ -227,59 +226,39 @@
       </div>
     </div>
   </div>
+</div>
 
-  <div class="modal fade" id="myModal1" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title text-muted edit">CHANGE PASSWORD</h4>
-        </div>
-        <div class="modal-body">
-          <div>
-            <div class="change1 text-muted pl-5 pt-4">Old Password *</div>
-            <input
-              type="password"
-              class="inputs pt-3"
-              [(ngModel)]="oldpassword"
-              required
-            />
-          </div>
-          <div>
-            <div class="change1 text-muted pl-5 pt-4">New Password *</div>
-            <input
-              type="password"
-              class="inputs pt-3"
-              [(ngModel)]="newpassword"
-              minlength="6"
-              required
-            />
-          </div>
-          <div>
-            <div class="change1 text-muted pl-5 pt-4">
-              Confirm New Password *
-            </div>
-            <input
-              type="password"
-              class="inputs pt-3"
-              [(ngModel)]="confirmpassword"
-              minlength="6"
-              required
-            />
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-default"
-            (click)="changePassword()"
-          >
-            Save
-          </button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">
-            Close
-          </button>
-        </div>
-      </div>
+
+<div class="custom-alert-popup" *ngIf="alert">
+  <div class="custom-popup-content success">
+   <i class="material-icons text-success">done</i>
+   <strong>{{alertMessage}}</strong>
+  </div>
+</div>
+
+<!-- Custom Error Alert Popup -->
+<div class="custom-alert-popup" *ngIf="alertError">
+  <div class="custom-popup-content error">
+    <div>
+      <i class="material-icons text-danger">error</i>
+    <strong>{{alertErrorMessage}}</strong>
+    </div>
+    <button (click)="closeErrorAlert()" class="custom-close-button">Close</button>
+  </div>
+</div>
+
+<!-- Custom Error Alert Popup -->
+<div class="custom-alert-popup" *ngIf="confirmAlert">
+  <div class="custom-popup-content error">
+    <div class="content">
+      <i class="material-icons ">info</i>
+      <strong>
+        <span>Are you sure you want to make the changes?</span>
+      </strong>
+    </div>
+    <div style="display: flex; justify-content: space-around;">
+      <button (click)="confirmAction()" class="custom-close-button">Save</button>
+      <button (click)="closeConfirmAlert()" class=" custom-close-button">Cancel</button>
     </div>
   </div>
 </div>

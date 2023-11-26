@@ -50,6 +50,12 @@ export class MainPageComponent implements OnInit {
       this.displayedBlogs = this.displayedBlogs.concat(newBlogs);
     }
 
+    encodeNewLine(content:string)  {      
+      content = content.replace(/\n/g, '&#10; ');
+      console.log(content);
+      return content;
+    }
+
   async getBlogs() {
     // const url = 'http://localhost:8081/api/v1/posts';
     const url = 'https://nuestro.iverique.com/api/v1/posts';
