@@ -3,11 +3,11 @@
     <div class="container">
       <div class="row pt-5">
         <div *ngIf="superAccess" class="col-sm-3 border-right link1">
-          <div  class="pt-4 font-weight-bold link pb-3 text-dark">
-            <a data-toggle="modal" data-target="#myModal"> Edit Profile </a>
+          <div  class="pt-4 font-weight-bold link pb-3 text-dark" (click)="openEditProfileModal()">
+            <a> Edit Profile </a>
           </div>
-          <div class="pt-4 font-weight-bold link pb-3 text-dark">
-            <a data-toggle="modal" data-target="#databaseModal"> Database </a>
+          <div class="pt-4 font-weight-bold link pb-3 text-dark" (click)="databaseData()">
+            <a> Database </a>
           </div>
           <div class="pt-4 font-weight-bold link pb-3 text-dark">
             <a (click)="deactivateUser()"> Deactivate Profile </a>
@@ -65,17 +65,6 @@
             </div>
           </div>
         </diV>
-        
-        
-        <div class="custom-alert-popup" *ngIf="alert">
-          <div class="custom-popup-content" [ngClass]="success ? 'success' : 'error'">
-            <i class="material-icons" [ngClass]="success ? 'success' : 'error'"></i>
-            <strong>{{ alertHeader }}</strong>
-            <div>
-              {{ alertMessage }}
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -253,11 +242,11 @@
     <div class="content">
       <i class="material-icons ">info</i>
       <strong>
-        <span>Are you sure you want to make the changes?</span>
+        <span>{{confirmAlerText}}</span>
       </strong>
     </div>
     <div style="display: flex; justify-content: space-around;">
-      <button (click)="confirmAction()" class="custom-close-button">Save</button>
+      <button (click)="confirmAction(confirmButtonText)" class="custom-close-button">{{confirmButtonText}}</button>
       <button (click)="closeConfirmAlert()" class=" custom-close-button">Cancel</button>
     </div>
   </div>

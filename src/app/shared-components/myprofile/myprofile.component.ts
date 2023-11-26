@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -13,22 +13,22 @@ import { BlogService } from 'src/app/services/blog.service';
   styleUrls: ['./myprofile.component.scss'],
 })
 export class MyprofileComponent implements OnInit {
+
+  @ViewChild('myModal') myModal: ElementRef;
+
+  openModal() {
+    this.modalService.open(this.myModal, { centered: true });
+  }
+
   submitted = false;
   id: string = '';
   userId: string = '';
   superAccess: boolean = false;
-  username: any;
-  name: any;
   email: any;
   firstName: string = '';
   lastName: string = '';
-  bio: any;
-  password: any;
   registerForm: any;
   databaseForm: any;
-  followersLength: any;
-  requests: any;
-  followingLength: any;
   array: any[] = [];
 
   alert: boolean = false;
@@ -55,7 +55,8 @@ export class MyprofileComponent implements OnInit {
     private httpClient: HttpClient,
     private userService: UserService,
     private authService: AuthenticationService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private modalService: NgbModal
   ) {
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -70,10 +71,6 @@ export class MyprofileComponent implements OnInit {
       databasePassword: ['', Validators.required],
     });
   }
-
-  error = false;
-  url = 'http://localhost:10083/user/getProfile/';
-
   updatePost(blogId: string) {
     this.router.navigate(['/editPost', blogId]);
   }
@@ -87,7 +84,7 @@ export class MyprofileComponent implements OnInit {
         this.success = true;
         setTimeout(() => {
           this.ajaxCall(this.id);
-        }, 5000);
+        }, 3000);
       });
     } else {
       this.success = false;
@@ -96,7 +93,7 @@ export class MyprofileComponent implements OnInit {
       this.alertMessage = 'Something went Wrong!';
       setTimeout(() => {
         this.ajaxCall(this.id);
-      }, 5000);
+      }, 3000);
     }
   }
   addBlog() {
@@ -122,13 +119,12 @@ export class MyprofileComponent implements OnInit {
             if (res && res.status === 200) {
               let user = res.data;
               console.log(user);
-              this.username = user.username;
               this.firstName = user.firstName;
               this.lastName = user.lastName;
               this.email = user.email;
-              this.bio = user.bio;
-              this.password = user.password;
               if (user.database) {
+                console.log(user.database);
+                this.database=user.database.database;
                 this.server = user.database.server;
                 this.port = user.database.port;
                 this.databaseType = user.database.type;
@@ -190,10 +186,11 @@ export class MyprofileComponent implements OnInit {
     this.userService.editDatabase(json).subscribe(
       (res: any) => {
         if (res.status == 200) {
-          setTimeout(() => {
             this.alert = true;
-            this.alertHeader = 'Databse Updated successfully!';
-          }, 5000);
+            this.alertMessage = 'Database Updated successfully!';
+            setTimeout(() => {
+              this.alert=false;
+            }, 3000);
         } else {
           this.alertError = true;
           this.alertErrorMessage = 'Something went wrong!';
@@ -209,49 +206,21 @@ export class MyprofileComponent implements OnInit {
   closeErrorAlert() {
     this.alertError = false; // Hide error alert popup
   }
-
-  myblogs() {
-    this.router.navigate(['/myPosts/' + this.id]);
-  }
   oldpassword: undefined;
   newpassword: undefined;
   confirmpassword: undefined;
   changeBoolean = false;
 
-  changePassword() {
-    if (
-      this.oldpassword == undefined ||
-      this.newpassword == undefined ||
-      this.confirmpassword == undefined
-    ) {
-      alert('fields are left empty');
-    } else if (this.password == this.oldpassword) {
-      if (this.newpassword == this.confirmpassword) {
-        this.password = this.newpassword;
-        this.changeBoolean = true;
-        alert('Password changes successfully');
-      } else {
-        alert('Confirm password does not match');
-      }
-    } else {
-      alert('your current password is incorrect');
-    }
-  }
-
-  confirmAlert: boolean=false;
-  confirmAction() {
-    let formData = new FormData();
-    formData.append('firstName', this.firstName);
-    formData.append('lastName', this.lastName);
-    console.log(formData);
-
-    this.userService.updateUserProfile(formData).subscribe(
-      (res: any) => {
+  deleteUser() {
+    this.userService.deleteUser().subscribe(
+      (res:any) => {        
         if (res.status == 200) {
-          setTimeout(() => {
             this.alert = true;
-            this.alertHeader = 'Profile Updated successfully!';
-          }, 5000);
+            this.alertHeader = 'Profile Deleted successfully!';
+            setTimeout(() => {
+              this.alert=false;
+            },3000);
+          this.authService.logoutService();          
         } else {
           this.alertError = true;
           this.alertErrorMessage = 'Something went wrong!';
@@ -263,131 +232,65 @@ export class MyprofileComponent implements OnInit {
       });
   }
 
+
+  confirmAlert: boolean=false;
+  confirmButtonText:string='';
+  confirmAlerText:string='';
+  confirmAction(e:any) {
+    this.confirmAlert=false;
+    if(e=='Delete') {
+      this.deleteUser();
+    } 
+    else {
+      let json = {
+        firstName:this.firstName,
+        lastName:this.lastName
+      };
+      this.userService.updateUserProfile(json).subscribe(
+        (res: any) => {
+          if (res.status == 200) {
+              this.alert = true;
+              this.authService.setUser(res.data);
+              this.alertMessage = 'Profile Updated successfully!';
+              setTimeout(() => {
+                this.alert=false;
+              }, 3000);
+          } else {
+            this.alertError = true;
+            this.alertErrorMessage = 'Something went wrong!';
+          }
+        },
+        (err: any) => {
+          this.alertError = true;
+          this.alertErrorMessage = 'Something went wrong!';
+        });
+    }
+  }
+
   closeConfirmAlert() {
     this.confirmAlert = false;
+    this.confirmAlerText='';
+    this.confirmButtonText='';
   }
   validate = false;
   editUser() {
     this.confirmAlert = true; 
-  }
-
-  logoutUrl = 'http://localhost:10083/login/logout';
-  logout() {
-    if (confirm('you want to logout??')) {
-      if (this.authService.checkLogin()) {
-        this.authService.logoutService();
-        this.httpClient.get(this.logoutUrl).subscribe((res) => {
-          alert('Logout successful');
-        });
-
-        this.router.navigate(['/home']);
-      }
-    } else {
-      alert('ohk');
-    }
+    this.confirmAlerText='Do you want to save th changes?';
+    this.confirmButtonText='Save';
   }
 
   deactivate = false;
   deactivateUser() {
-    const headers = this.authService.addHeaders();
-
-    let editUrl = 'http://localhost:10083/user/deactivateUser';
-    let json = {
-      username: this.username,
-      bio: this.bio,
-      password: this.password,
-      email: this.email,
-    };
-
-    if (confirm('Are you sure you want to deactivate?')) {
-      this.httpClient.post(editUrl, json, { headers }).subscribe((res) => {
-        console.log(json);
-      });
-      this.deactivate = true;
-      this.changeBoolean = true;
-      if (this.deactivate) {
-        this.logout();
-        this.router.navigate(['/home']);
-      }
-    } else {
-      alert('ohk!!');
-    }
+    this.confirmAlerText='Are you sure you want to permenantly dete the account?';
+    this.confirmAlert=true;
+    this.confirmButtonText='Delete';
   }
 
-  getFollowers() {
-    let url = 'http://localhost:10083/follow/getFollowers/' + this.id;
-    const headers = this.authService.addHeaders();
-
-    this.httpClient.get(url, { headers }).subscribe((res: any) => {
-      let arr = [];
-      arr = res;
-      this.followersLength = arr.length;
-    });
+  async databaseData() {
+    await this.fetchUserProfile();
+    // $('#databaseModal').modal('show');
   }
-
-  follow() {
-    let url = 'http://localhost:10083/follow/sendRequest/' + this.id;
-    const headers = this.authService.addHeaders();
-
-    this.httpClient.get(url, { headers }).subscribe((res: any) => {
-      if (res) {
-        // document.getElementById("followButton").innerHTML="Request Sent";
-      } else {
-        alert('Request already Sent');
-      }
-    });
-  }
-
-  getRequest() {
-    let url = 'http://localhost:10083/follow/getAllRequest';
-    const headers = this.authService.addHeaders();
-
-    this.httpClient.get(url, { headers }).subscribe((res: any) => {
-      this.requests = res;
-    });
-  }
-
-  acceptRequest(id: string) {
-    let url = 'http://localhost:10083/follow/acceptRequest/' + id;
-    const headers = this.authService.addHeaders();
-
-    this.httpClient.get(url, { headers }).subscribe((res: any) => {
-      this.getRequest();
-      this.getFollowers();
-    });
-  }
-
-  rejectRequest(id: string) {
-    let url = 'http://localhost:10083/follow/declineRequest/' + id;
-    const headers = this.authService.addHeaders();
-
-    this.httpClient.get(url, { headers }).subscribe((res: any) => {
-      this.getRequest();
-    });
-  }
-
-  getFollowing() {
-    let url = 'http://localhost:10083/follow/getFollowing/' + this.id;
-    const headers = this.authService.addHeaders();
-
-    this.httpClient.get(url, { headers }).subscribe((res: any) => {
-      let arr = [];
-      arr = res;
-      this.followingLength = arr.length;
-    });
-  }
-
-  getFollowingRoute() {
-    if (this.superAccess) {
-      //navigate to see list
-      this.router.navigate(['/profile/followers/' + this.userId]);
-    }
-  }
-
-  getFollowersRoute() {
-    if (this.superAccess) {
-      //navigate to see list
-      this.router.navigate(['/profile/followers/' + this.userId]);
-    }
+  openEditProfileModal()  {
+    // $('#myModal').modal('show');
   }
 }

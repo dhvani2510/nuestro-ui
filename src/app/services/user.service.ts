@@ -37,4 +37,9 @@ export class UserService {
     const headers = this.getHeaders();
     return this.http.get(`${this.apiUrl}/${id}`,{headers});
   }
+
+  deleteUser():Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.delete(this.apiUrl, {headers});
+  }
 }
