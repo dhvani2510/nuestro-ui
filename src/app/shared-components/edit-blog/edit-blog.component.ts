@@ -39,42 +39,46 @@ export class EditBlogComponent implements OnInit {
 
   async getBlog(blogId: string){
     let res = await this.blogService.getCompleteBlog(blogId).toPromise();
+    console.log(res);
     if (res != null && res !== undefined) {
         console.log(res.data);
-        this.date = res.data.createdAt;
-        this.category = res.data.category;
-        this.title = res.data.title;
         this.content = res.data.content;
-      }
+    }
+    else
+      this.errorAlert= true;
   }
 
 
   blogId: string ='';
-  date: any;
-  category: any;
-  image: any;
   content: any;
-  blogDescription: any;
-  title: any;
   access: any;
   blogs=[];
-
-
+  alert:boolean=false;
+  errorAlert:boolean = false;
+  closeSuccessAlert() {
+      this.alert = false;
+  }
+  closeErrorAlert()  {
+    this.errorAlert = false;
+  }
   editBlog(blogId: any)
   {
     this.submitted = true;
     let json={
-      blogId : blogId,
-      title : this.title,
-      category : this.category,
-      description : this.content,
+      content : this.content,
     }
 
-    this.blogService.editBlog(json).subscribe(
+    this.blogService.editBlog(blogId,json).subscribe(
       (res:any) => {
         if(res.status==200) {
-          alert('SUCCESS!! :-)\nBlog updated succefully!');  
+          this.alert = true;
         }
+        else
+          this.errorAlert =true;
+      },
+      (err:any) => {
+        console.log(err);
+        this.errorAlert = true;
       });
   }
   id: string='';

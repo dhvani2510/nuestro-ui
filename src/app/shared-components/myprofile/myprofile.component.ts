@@ -4,6 +4,8 @@ import { HttpClient } from "@angular/common/http";
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserService } from 'src/app/services/user.service';
+import { switchMap } from 'rxjs';
+import { BlogService } from 'src/app/services/blog.service';
 
 
 @Component({
@@ -12,8 +14,6 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./myprofile.component.scss']
 })
 export class MyprofileComponent implements OnInit {
-
-
   submitted = false;
   id: string ="";
   userId: string="";
@@ -30,6 +30,13 @@ export class MyprofileComponent implements OnInit {
   followersLength: any;
   requests: any;
   followingLength: any;
+  array:any[] = [];
+
+  alert:boolean = false;
+  alertMessage:string= '';
+  alertHeader:string='';
+  success: boolean=false;
+  blogId:string='';
 
   server:string='';
   database:string='';
@@ -37,9 +44,12 @@ export class MyprofileComponent implements OnInit {
   databaseUsername:string='';
   databasePassword:string='';
   databaseType: string='';
+  blogUrl = 'https://nuestro.iverique.com/api/v1/posts/users/';
+  content: any;
 
   constructor( private router: Router,
     private route: ActivatedRoute,
+    private blogService: BlogService,
     private httpClient: HttpClient,
     private userService:UserService,
     private authService: AuthenticationService,
@@ -66,39 +76,107 @@ export class MyprofileComponent implements OnInit {
   error = false;
   url = "http://localhost:10083/user/getProfile/";
 
-  ngOnInit() {
-    this.route.paramMap.subscribe((params: ParamMap)=>{
-      let id=params.get("id");
-      this.id=id? id : "";
-    });
-    this.getUserInfo(this.id);
+  updatePost(blogId: string) {
+    this.router.navigate(['/editPost', blogId]);
   }
 
-  getUserInfo(id: string){
-    this.userId =id;
 
-    let user:any = this.authService.getUser();
-    if(user)  {
-      this.username=user.username;
-      this.firstName=user.firstName;
-      this.lastName=user.lastName;
-      this.email=user.email;
-      this.bio=user.bio;
-      this.password=user.password;
-      if(user.database)  {
-        this.server=user.database.server;
-        this.port=user.database.port;
-        this.databaseType=user.database.type;
-        this.databaseUsername=user.database.username;
-      }
+  deleteBlog(id:string) {
+    if (confirm('Are you sure you want to delete the blog?')) {
+      this.blogService.deleteBlog(id).subscribe((res:any) => {
+        this.alert =true;
+        this.alertHeader="Success";
+        this.alertMessage="Blog deleted successfully";
+        this.success=true;
+        setTimeout(() => {
+          this.ajaxCall(this.id);
+        },5000)
+      });
+    } else {
+      this.success=false;
+      this.alert =true;
+      this.alertHeader="Error";
+      this.alertMessage="Something went Wrong!";
+      setTimeout(() => {
+        this.ajaxCall(this.id);
+      },5000)    }
+  }
+  addBlog() {
+    this.router.navigate(['/createPost']);
+  }
+
+  async ngOnInit() {
+    this.fetchUserProfile();
+  }
+
+  async fetchUserProfile() {
+    try {
+      this.route.paramMap.pipe(
+        switchMap((params: ParamMap) => {
+          let id = params.get("id");
+          this.id = id ? id : "";
+          return this.userService.getUserProfile(this.id);
+        })
+      ).subscribe(
+        async (res: any) => {
+          if (res && res.status === 200) {
+            let user = res.data;
+            console.log(user);
+            this.username = user.username;
+            this.firstName = user.firstName;
+            this.lastName = user.lastName;
+            this.email = user.email;
+            this.bio = user.bio;
+            this.password = user.password;
+            if (user.database) {
+              this.server = user.database.server;
+              this.port = user.database.port;
+              this.databaseType = user.database.type;
+              this.databaseUsername = user.database.username;
+            }
+            let currentUser = this.authService.getUser().id;
+            if (currentUser == this.id) {
+              this.superAccess = true;
+            }
+            console.log(this.blogUrl+this.id);
+            
+            await this.ajaxCall(this.id);
+          }
+        },
+        (error) => {
+          console.error('Error fetching user profile:', error);
+          // Handle error as needed
+        }
+      );
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+      // Handle other errors as needed
     }
   }
+  
+
+  async ajaxCall(id:string) {
+    const headers = this.authService.addHeaders();
+    this.httpClient.get(this.blogUrl+id, { headers }).subscribe((res:any) => {
+      console.log("Blogs", res);
+      this.array = res.data;
+      this.array.forEach((element:any) => {
+        this.blogId = element.blogId;
+        this.content = element.products;
+      });
+    });
+    if(this.alert) {
+      this.alert = false;
+      this.alertHeader = '';
+      this.alertMessage = '';
+    }
+  }
+
 
   blogpage()
     {
       this.router.navigate(["/createPost"]);
     }
-
 
     editDatabaseConnection()  {
       let json = {
@@ -121,7 +199,7 @@ export class MyprofileComponent implements OnInit {
 
   myblogs()
   {
-    this.router.navigate(["/myblogs/"+this.id]);
+    this.router.navigate(["/myPosts/"+this.id]);
 
   }
   oldpassword: undefined;

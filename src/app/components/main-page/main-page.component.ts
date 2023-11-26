@@ -12,6 +12,8 @@ import { UserService } from 'src/app/services/user.service';
 export class MainPageComponent implements OnInit {
   search1: string = '';
   blog: any[] = [];
+  displayedBlogs:any[] = [];
+  pageSize=10;
   popularBlog: any[] = [];
   followerBlogs: any[] = [];
   categoriess: any[] = [];
@@ -40,6 +42,14 @@ export class MainPageComponent implements OnInit {
     this.router.navigate(['/createPost']);
   }
 
+  blogsToShowInitially = 10;
+
+    loadMoreBlogs() {
+      const currentLength = this.displayedBlogs.length;
+      const newBlogs = this.blog.slice(currentLength, currentLength + this.pageSize);
+      this.displayedBlogs = this.displayedBlogs.concat(newBlogs);
+    }
+
   async getBlogs() {
     // const url = 'http://localhost:8081/api/v1/posts';
     const url = 'https://nuestro.iverique.com/api/v1/posts';
@@ -47,9 +57,13 @@ export class MainPageComponent implements OnInit {
     this.httpClient.get(url, { headers }).subscribe((res: any) => {
       if(res.status == 200)  {
         this.blog = res.data;
-        console.log(this.blog);
       }
+      this.updateDisplayedBlogs();
+      console.log(this.displayedBlogs.length);
     });
+  }
+  private updateDisplayedBlogs() {
+    this.displayedBlogs = this.blog.slice(0, this.pageSize);
   }
 
   likeBlog(blogs:any[], id: any)  {
@@ -109,26 +123,15 @@ export class MainPageComponent implements OnInit {
     });
   }
 
-  search(i: string) {
-    const categoryUrl = `http://localhost:10083/blog/search/category/${i}`;
-    const headers = this.authService.addHeaders();
-
-    this.httpClient.get(categoryUrl, { headers }).subscribe((res: any) => {
-      this.blog = res;
-      this.followerBlogs = res;
-      console.log(this.blog);
-    });
-  }
 
   searchinput() {
     const categoryUrl = `https://nuestro.iverique.com/api/v1/posts/search?keyword=${this.search1}`;
     const headers = this.authService.addHeaders();
-
     this.httpClient.get(categoryUrl, { headers }).subscribe((res: any) => {
 
       if(res.status == 200)  {
         this.blog = res.data;
-        console.log(this.blog);
+        this.updateDisplayedBlogs();
       }
     });
   }

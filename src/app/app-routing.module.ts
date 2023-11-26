@@ -5,11 +5,8 @@ import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { AuthGuard } from './services/auth.guard';
-import { UserListComponent } from './components/user-list/user-list.component';
 import { NewblogComponent } from './components/newblog/newblog.component';
 import { MyprofileComponent } from './shared-components/myprofile/myprofile.component';
-import { MyBlogsComponent } from './components/my-blogs/my-blogs.component';
-import { CompleteBlogComponent } from './shared-components/complete-blog/complete-blog.component';
 import { EditBlogComponent } from './shared-components/edit-blog/edit-blog.component';
 import { AboutComponent } from './shared-components/about/about.component';
 import { PrivacyComponent } from './shared-components/privacy/privacy.component';
@@ -26,20 +23,9 @@ const routes: Routes = [
   },
   { path: 'home', component: MainPageComponent, canActivate: [AuthGuard] },
   { path: 'createPost', component: NewblogComponent, canActivate: [AuthGuard] },
-  { path: 'userList', component: UserListComponent, canActivate: [AuthGuard] },
   {
-    path: 'myblogs/:id',
-    component: MyBlogsComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'editblog/:id',
+    path: 'editPost/:id',
     component: EditBlogComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'completeBlog/:id',
-    component: CompleteBlogComponent,
     canActivate: [AuthGuard],
   },
   { path: 'about', component: AboutComponent },

@@ -1,35 +1,40 @@
 // Define Variables
-$primary-color: #f88020;
+$primary-color: #45969b;
 $secondary-color: #6C757D;
 
 // Main Content
 .main-content {
   background-color: #f5f5f5;
   padding: 20px;
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
+  .main {
+    min-height: 80vh;
+  }
+
+  .invalid {
+    padding: 20pxx;
+    text-align: center;
+    font-size: xx-large;
+  }
 
   .custom-container {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 20px 0;
+    padding: 15px; // Increased padding for better spacing
     width: 100%;
 
-    .custom-padding {
-      padding: 15px;
+    .custom-col  {
+      flex-grow: 2;
     }
 
-    .custom-bg {
+    // Common styles for custom containers
+    &.custom-bg {
       background-color: #fff;
     }
 
-    .custom-shadow {
+    &.custom-shadow {
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .custom-styles {
-      // Add any custom styles here
     }
 
     .text-capitalize {
@@ -41,6 +46,7 @@ $secondary-color: #6C757D;
     }
   }
 
+  // Input Group styles
   .input-group {
     .input-group-text {
       background-color: $primary-color;
@@ -54,18 +60,21 @@ $secondary-color: #6C757D;
       padding: 10px;
       font-size: 16px;
     }
-
-    .custom-button {
-      background-color: $primary-color;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      padding: 10px 15px;
-      font-size: 16px;
-      cursor: pointer;
-    }
   }
 
+  .custom-button {
+    background-color: $primary-color;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    &:hover {
+      opacity: 80%;
+    }
+  }
+  // Trending Topic styles
   .trending-topic {
     background-color: $primary-color;
     color: #fff;
@@ -75,39 +84,49 @@ $secondary-color: #6C757D;
     cursor: pointer;
   }
 
+  // Head styles
   .head {
     font-size: 24px;
     font-weight: bold;
   }
 
+  // Post Content styles
   .post-content {
     .user-info {
       display: flex;
       align-items: center;
+
+      // Profile Image styles
       .profile-image {
         width: 40px;
         height: 40px;
         border-radius: 50%;
         margin-right: 10px;
       }
+
+      // User Name styles
       .user-name {
         font-weight: bold;
       }
     }
 
+    // Post Text styles
     .post-text {
       margin-top: 10px;
     }
   }
 
+  // Post Actions styles
   .post-actions {
     margin-top: 10px;
 
+    // Like, Comment, Share styles
     .like-action,
     .comment-action,
     .share-action {
       margin-right: 20px;
 
+      // Icon styles
       i {
         margin-right: 5px;
         cursor: pointer;
@@ -115,6 +134,7 @@ $secondary-color: #6C757D;
     }
   }
 
+  // Comment Box styles
   .comment-box {
     input {
       border: 1px solid $secondary-color;
