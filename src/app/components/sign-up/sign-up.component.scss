@@ -173,11 +173,28 @@
   border: 2px solid #FF5733;
 }
 
-/* Style for icons */
-.material-icons {
-  font-size: 36px;
-  margin-bottom: 10px;
+.custom-icon {
+  color: white;
+  font-size: 24px;
+  display: flex;
+  align-items: center; /* Align items vertically */
+  text-decoration: none;
 }
+
+.material-icons {
+  margin-right: 5px; /* Adjust the spacing between icon and text */
+}
+
+.icon-text {
+  color: white;
+  display: inline-block;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* Style for icons */
+
 
 /* Style for the close button */
 .custom-close-button {
