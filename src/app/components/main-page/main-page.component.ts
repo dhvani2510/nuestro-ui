@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserService } from 'src/app/services/user.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-main-page',
@@ -20,6 +21,7 @@ export class MainPageComponent implements OnInit {
   id: any;
 
   constructor(
+    private renderer: Renderer2, private el: ElementRef,private sanitizer: DomSanitizer,
     private router: Router,
     private route: ActivatedRoute,
     private httpClient: HttpClient,
@@ -51,10 +53,46 @@ export class MainPageComponent implements OnInit {
     }
 
     encodeNewLine(content:string)  {      
-      content = content.replace(/\n/g, '&#10; ');
-      console.log(content);
+      content.replaceAll('\n','\<br>');
       return content;
     }
+
+    truncateContent(content: string, lines: number): string {
+      const truncatedContent = content.split('\n').slice(0, lines).join('<br>');
+      return truncatedContent;
+    }
+    
+    showFullContent(blogId: number) {
+      const overlay = this.renderer.createElement('div');
+      this.renderer.addClass(overlay, 'overlay');
+    
+      const popup = this.renderer.createElement('div');
+      this.renderer.addClass(popup, 'popup');
+    
+      const content = this.displayedBlogs.find(blog => blog.id === blogId)?.content;
+    
+      // Use Angular's DomSanitizer to sanitize and bind the content
+      const sanitizedContent = this.sanitizer.bypassSecurityTrustHtml(content);
+      this.renderer.setProperty(popup, 'innerHTML', sanitizedContent.toString());
+    
+      // Dynamically set the max-height based on the screen size
+      const maxHeight = window.innerHeight - 100; // Adjust as needed
+      this.renderer.setStyle(popup, 'max-height', `${maxHeight}px`);
+    
+      // Add the popup and overlay to the body
+      this.renderer.appendChild(overlay, popup);
+      this.renderer.appendChild(document.body, overlay);
+    
+      // Close the popup when clicking outside of it
+      this.renderer.listen(overlay, 'click', () => this.closePopup(overlay));
+    }
+    
+    // ... (other code)
+    
+    closePopup(overlay: HTMLElement) {
+      this.renderer.removeChild(document.body, overlay);
+    }
+    
 
   async getBlogs() {
     // const url = 'http://localhost:8081/api/v1/posts';
@@ -72,51 +110,51 @@ export class MainPageComponent implements OnInit {
     this.displayedBlogs = this.blog.slice(0, this.pageSize);
   }
 
-  likeBlog(blogs:any[], id: any)  {
-    const url = 'http://localhost:8080/api/blogs/';
-    const headers = this.authService.addHeaders();
-    this.httpClient.post(url+'like',{id},{headers:headers}).subscribe(
-      (response:any) => {
-        if(response.status == 200)  {
-          blogs = blogs.map(item => {
-            if(item.id == response.data.id) {
-              return response.data
-            }
-            else
-              return item;
-          })
-        }
-        console.log(blogs);
-      });
+  likeBlog(id: any)  {
+    // const url = 'http://localhost:8080/api/blogs/';
+    // const headers = this.authService.addHeaders();
+    // this.httpClient.post(url+'like',{id},{headers:headers}).subscribe(
+    //   (response:any) => {
+    //     if(response.status == 200)  {
+    //       blogs = blogs.map(item => {
+    //         if(item.id == response.data.id) {
+    //           return response.data
+    //         }
+    //         else
+    //           return item;
+    //       })
+    //     }
+    //     console.log(blogs);
+    //   });
   }
 
-  commentBlog(blogs:any, id: any, comment:string)  {
-    const url = 'http://localhost:8080/api/comment/';
-    const headers = this.authService.addHeaders();
-    const request= {
-      "comment": comment,
-      "id": id
-    };
-    this.httpClient.post(url+ `add`,request, {headers:headers}).subscribe(
-      (response:any) => {
-        if(response.status == 200)  {
-          console.log("commneted");
-          console.log(response);
-          if(response.status == 200)  {
-            blogs = blogs.map((item:any) => {
-              if(item.id == response.data.id) {
-                return response.data
-              }
-              else
-                return item;
-            })
-          }
-          blogs.forEach((element:any) => {
-            element.showCommentInput = false
-          });
-          console.log(blogs);
-        }
-      });
+  commentBlog(blog:any)  {
+    // const url = 'http://localhost:8080/api/comment/';
+    // const headers = this.authService.addHeaders();
+    // const request= {
+    //   "comment": comment,
+    //   "id": id
+    // };
+    // this.httpClient.post(url+ `add`,request, {headers:headers}).subscribe(
+    //   (response:any) => {
+    //     if(response.status == 200)  {
+    //       console.log("commneted");
+    //       console.log(response);
+    //       if(response.status == 200)  {
+    //         blogs = blogs.map((item:any) => {
+    //           if(item.id == response.data.id) {
+    //             return response.data
+    //           }
+    //           else
+    //             return item;
+    //         })
+    //       }
+    //       blogs.forEach((element:any) => {
+    //         element.showCommentInput = false
+    //       });
+    //       console.log(blogs);
+    //     }
+    //   });
   }
 
   getFollowerBlog() {

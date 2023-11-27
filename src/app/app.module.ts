@@ -21,6 +21,7 @@ import { PrivacyComponent } from './shared-components/privacy/privacy.component'
 import { TermsAndConditionsComponent } from './shared-components/terms-and-conditions/terms-and-conditions.component';
 import { MatCardModule } from '@angular/material/card';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CompleteBlogComponent } from './shared-components/complete-blog/complete-blog.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     EditBlogComponent,
     AboutComponent,
     PrivacyComponent,
-    TermsAndConditionsComponent
+    TermsAndConditionsComponent,
+    CompleteBlogComponent
   ],
   imports: [
     BrowserModule,

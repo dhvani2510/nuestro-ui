@@ -42,40 +42,30 @@
                   </button>
                 </div>
               </div>
-          
-              <ng-container *ngFor="let i of array; let iIndex = index">
-                <div class="col-sm-6 mb-4">
-                  <div class="card shadow">
-                    <div class="container-fluid">
-                      <div class="d-flex size text-capitalize text-dark contents">
-                        {{ i.content }}
+
+              <div *ngFor="let i of array; let ind = index" class="col-md-6 mb-4">
+                <div class="custom-container custom-padding custom-border-bottom">
+                  <div class="custom-row">
+                    <div class="col">
+                      <div class="descrip pt-2" [innerHTML]="truncateContent(i.content, 2)"></div>        
+                      <div *ngIf="i.content.split('\n').length > 2">
+                        <a [routerLink]="'/completeBlog/' + i.id" class="read-more-link text-muted">Read More</a>
                       </div>
                     </div>
-                    <div class="custom-row mt-5 mb-4">
-                      <button type="button" class="btn rounded-2 col-sm-4" (click)="updatePost(i.id)">
-                        Update Post
-                      </button>
-                      <button type="button" class="btn rounded-2 col-sm-4" (click)="deleteBlog(i.id)">
-                        Delete Post
-                      </button>
-                    </div>
+                  </div>
+                  <div *ngIf="superAccess" class="custom-row">
+                    <button type="button" class="btn rounded-2 col-sm-4" (click)="updatePost(i.id)">
+                      Update Post
+                    </button>
+                    <button type="button" class="btn rounded-2 col-sm-4" (click)="deleteBlog(i.id)">
+                      Delete Post
+                    </button>
                   </div>
                 </div>
-              </ng-container>
+              </div>       
             </div>
           </div>
         </diV>
-        
-        
-        <div class="custom-alert-popup" *ngIf="alert">
-          <div class="custom-popup-content" [ngClass]="success ? 'success' : 'error'">
-            <i class="material-icons" [ngClass]="success ? 'success' : 'error'"></i>
-            <strong>{{ alertHeader }}</strong>
-            <div>
-              {{ alertMessage }}
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>

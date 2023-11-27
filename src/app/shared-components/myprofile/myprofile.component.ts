@@ -13,6 +13,10 @@ import { BlogService } from 'src/app/services/blog.service';
   styleUrls: ['./myprofile.component.scss'],
 })
 export class MyprofileComponent implements OnInit {
+  truncateContent(content: string, lines: number): string {
+    const truncatedContent = content.split('\n').slice(0, lines).join('<br>');
+    return truncatedContent;
+  }
   submitted = false;
   id: string = '';
   userId: string = '';

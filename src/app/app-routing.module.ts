@@ -11,6 +11,7 @@ import { EditBlogComponent } from './shared-components/edit-blog/edit-blog.compo
 import { AboutComponent } from './shared-components/about/about.component';
 import { PrivacyComponent } from './shared-components/privacy/privacy.component';
 import { TermsAndConditionsComponent } from './shared-components/terms-and-conditions/terms-and-conditions.component';
+import { CompleteBlogComponent } from './shared-components/complete-blog/complete-blog.component';
 
 const routes: Routes = [
   { path: '', component: FrontPageComponent },
@@ -23,6 +24,11 @@ const routes: Routes = [
   },
   { path: 'home', component: MainPageComponent, canActivate: [AuthGuard] },
   { path: 'createPost', component: NewblogComponent, canActivate: [AuthGuard] },
+  {
+    path: 'completeBlog/:id',
+    component: CompleteBlogComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'editPost/:id',
     component: EditBlogComponent,
