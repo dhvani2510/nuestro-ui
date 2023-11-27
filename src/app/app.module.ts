@@ -20,6 +20,7 @@ import { AboutComponent } from './shared-components/about/about.component';
 import { PrivacyComponent } from './shared-components/privacy/privacy.component';
 import { TermsAndConditionsComponent } from './shared-components/terms-and-conditions/terms-and-conditions.component';
 import { MatCardModule } from '@angular/material/card';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { MatCardModule } from '@angular/material/card';
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
-    MatCardModule
+    MatCardModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

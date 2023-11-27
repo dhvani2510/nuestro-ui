@@ -277,12 +277,4 @@ export class MyprofileComponent implements OnInit {
     this.confirmAlert=true;
     this.confirmButtonText='Delete';
   }
-
-  async databaseData() {
-    await this.fetchUserProfile();
-    // $('#databaseModal').modal('show');
-  }
-  openEditProfileModal()  {
-    // $('#myModal').modal('show');
-  }
 }
