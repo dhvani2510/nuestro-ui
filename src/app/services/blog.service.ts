@@ -31,4 +31,9 @@ export class BlogService {
     const headers = this.getHeaders();
     return this.http.put(this.apiUrl+blogId,json, {headers});  
   }
+
+  likeBlog(id:string): Observable<any>  {
+    const headers = this.getHeaders();
+    return this.http.post(this.apiUrl + id +"/like" ,{},{headers});
+  }
 }

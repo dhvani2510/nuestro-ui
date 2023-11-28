@@ -41,21 +41,25 @@
               </div>
             </div>
           </div>
+          <div *ngIf="i.commentsCount >0" class="comments-heading">
+            <a [routerLink]="'/completeBlog/' + i.id" class="read-more-link text-muted">View all comments</a>
+          </div>
           <div class="interaction-icons">
-            <i class="far fa-heart" (click)="likeBlog(i)"></i>
-            {{ i.likesCount }} Likes
-            <i class="far fa-comment" (click)="toggleCommentInput(blog, ind)"></i>
-            {{ i.commentsCount }} Comments
-      
-            <div *ngIf="i.showCommentInput" class="comment-box">
-              <input type="text" class="custom-input" placeholder="Add a comment..." [(ngModel)]="i.commentText" />
-              <button class="send-button" (click)="commentBlog(i)">Send</button>
-            </div>
+            <div (click)="likeBlog(i)">
+              <i class="far fa-heart" [class.red-heart]="i.isLiked" [class.fas]="i.isLiked" ></i> {{ i.likes }} Likes
+            </div> 
+           <div  (click)="toggleCommentInput(blog, ind)">
+            <i class="far fa-comment"></i> {{ i.commentsCount }} Comments
+           </div>
+          </div>
+          <div *ngIf="i.showCommentInput" class="comment-box">
+            <input type="text" class="custom-input" placeholder="Add a comment..." [(ngModel)]="commentText" />
+            <button class="send-button" (click)="commentBlog(i)">Send</button>
           </div>
         </div>
       </div>
     </div>
-    <div *ngIf="displayedBlogs.length > 10" class="text-center mt-3">
+    <div *ngIf="blog.length > 10" class="text-center mt-3">
       <button class="custom-button" (click)="loadMoreBlogs()">
         Load More
       </button>

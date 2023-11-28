@@ -28,7 +28,7 @@ $secondary-color: #6C757D;
     }
 
     .custom-padding {
-      height:30vh;
+      height:40vh;
     }
 
     // Common styles for custom containers
@@ -82,6 +82,14 @@ $secondary-color: #6C757D;
     display: flex;
     align-items: center;
     margin-top: 10px;
+    position: absolute;
+    bottom: 10vh;
+    div {
+      padding-right: 15px;
+    }
+  } 
+  .red-heart {
+    color: red;
   }
   
   .interaction-icons i {
@@ -255,6 +263,9 @@ $secondary-color: #6C757D;
 
   // Comment Box styles
   .comment-box {
+    position: absolute;
+    bottom: 2vh;
+    justify-content: space-between;
     input {
       border: 1px solid $secondary-color;
       border-radius: 5px;
@@ -270,7 +281,10 @@ $secondary-color: #6C757D;
       padding: 5px 10px;
       font-size: 14px;
       cursor: pointer;
-      margin-top: 10px;
+      margin-left: 10px;
     }
   }
+}
+.comments-heading {
+  display: block;
 }

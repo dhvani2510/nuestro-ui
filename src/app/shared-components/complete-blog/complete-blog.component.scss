@@ -31,11 +31,36 @@ img{
   height:50px;
   width:50px;
 }
+.red-heart {
+  color: red;
+}
 .btn-edit
 {
   width: 500px;
 }
+
+.display-comment  {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-buttons {
+  display: flex;
+  justify-content: space-between;
+  min-width:20%;
+}
+
+.info
+{
+  cursor: pointer;
+    height: fit-content;
+    padding: 8px;
+}
 .del
 {
   cursor: pointer;
+    color: red;
+    border: 1px solid red;
+    height: fit-content;
+    padding: 8px;
 }
