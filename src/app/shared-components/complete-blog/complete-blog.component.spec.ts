@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CompleteBlogComponent } from './complete-blog.component';
 
@@ -6,14 +6,12 @@ describe('CompleteBlogComponent', () => {
   let component: CompleteBlogComponent;
   let fixture: ComponentFixture<CompleteBlogComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ CompleteBlogComponent ]
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [CompleteBlogComponent]
     })
     .compileComponents();
-  }));
-
-  beforeEach(() => {
+    
     fixture = TestBed.createComponent(CompleteBlogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

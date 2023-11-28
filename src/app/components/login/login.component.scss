@@ -1,21 +1,99 @@
 /* Update background and container styles */
 .background1 {
-  background-color: #45969b;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/7923ce24293983.570a1fd8e5da3.jpg");
+  padding: 40px;
 }
+
+.text-right { 
+  text-align: right;
+  padding: 15px;
+
+  a {
+    text-decoration: none;
+    color: #777;
+
+    .icon {
+      font-size: 24px;
+    }
+  }
+  .custom-icon {
+    color: white;
+    font-size: 24px;
+    display: flex;
+    align-items: center; /* Align items vertically */
+    text-decoration: none;
+  }
+  
+  .material-icons {
+    margin-right: 5px; /* Adjust the spacing between icon and text */
+  }
+  
+  .icon-text {
+    display: inline-block;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+
+.custom-row {
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  .custom-col {
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    background: none; /* Remove background */
+    .heading {
+      font-size: 38px;
+    }
+
+    .signup {
+      font-size: 20px;
+    }
+  }
+  .custom-col {
+    flex-grow: 1;
+    .custom-container {
+      background-color: #fff;
+      overflow-y: auto;
+      padding: 15px;
+      flex-grow: 1;
+    }
+  }
+}
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-top: 8px; /* Adjust the margin as needed */
+}
+
+.checkbox-label {
+  margin-left: 5px; /* Adjust the margin as needed */
+  user-select: none; /* Prevent text selection on label */
+  color: #777;
+  font-weight: normal;
+}
+
 
 .login-container {
   background-color: #fff;
   padding: 20px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   width: 100%;
-  max-width: 400px;
+  max-width: 100vh;
   border-radius: 5px;
   margin: 0 auto;
+  flex-grow: 1;
 }
 
 /* Update the header styles */
@@ -24,15 +102,6 @@
   padding: 20px;
 }
 
-.custom-icon {
-  color: white;
-  text-decoration: none;
-  font-size: 24px;
-}
-
-.custom-icon:hover {
-  text-decoration: underline;
-}
 
 /* Update the "Hello!" text styles */
 .hello {
@@ -45,7 +114,7 @@
 /* Update the "Enter Email" and "Enter Password" text styles */
 .text-muted {
   font-size: 16px;
-  color: #555;
+  color: #666;
   text-align: center;
   margin-top: 10px;
 }
@@ -95,22 +164,30 @@
   margin-left: 10px; /* Add the desired space here */
 }
 
+.forget {
+  color: #777;
+  font-weight: normal;
+  display: flex;
+  padding-bottom: 10px;
+  &:hover {
+    color: #333;
+    text-decoration: underline;
+  }
+}
 /* Update the "Forgot Password?" and "LOG IN" button styles */
 .custom-btn {
   background-color: #45969b;
   color: #fff;
   border: none;
+  border-radius: 4px;
   padding: 15px;
-  border-radius: 5px;
+  padding: 10px 20px;
   cursor: pointer;
-  font-weight: bold;
-  width: 100%;
-  text-transform: uppercase;
-  margin-bottom: 15px; /* Add margin to create space between buttons */
-  &:disabled  {
-    opacity: 15%;
+  &:disabled {
+    opacity: 30%;
   }
 }
+
 
 /* Apply custom styles to the email input placeholder with FontAwesome icon */
 #email::placeholder {

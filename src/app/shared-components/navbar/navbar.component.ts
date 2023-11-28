@@ -54,8 +54,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     if (this.userLoggedIn) {
       this.user = this.authService.getUser();
     }
-    console.log(this.user);
-    
   }
 
   goToHome() {
@@ -70,9 +68,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.router.navigate(['/signup']);
   }
 
-  navigateToProfile() {
-    console.log(this.user);
-    
+  navigateToProfile() {    
     this.router.navigate(['/profile/'+this.user.id]);
   }
 

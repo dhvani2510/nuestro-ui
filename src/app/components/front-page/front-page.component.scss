@@ -13,7 +13,7 @@
 
     .custom-header {
       text-align: center;
-      background-image: url("//lh3.googleusercontent.com/EVaQo9gv2ko6xNWFWPFO8DKv-3RqK8J4g0yDcI0P3-hmf-uLSsYOMvRGqicF=d");
+      // background-image: url("//lh3.googleusercontent.com/EVaQo9gv2ko6xNWFWPFO8DKv-3RqK8J4g0yDcI0P3-hmf-uLSsYOMvRGqicF=d");
     }
 
     .custom-text {
@@ -33,7 +33,7 @@
       margin: 20px 0;
 
       .custom-button {
-        background-color: #f88020;
+        background-color: #f39422;
         font-size: 1rem;
         color: white;
         padding: 10px 20px;
@@ -57,77 +57,59 @@
       color: white;
     }
 
-    .custom-second-div {
-      background-color: #f88020;
-      padding: 20px;
-      position: relative;
-    
-      .custom-row {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-    
-        .custom-col {
-          flex: 0 0 50%;
-          padding: 20px;
-          text-align: center;
-    
-          .custom-image1 {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            transform: rotate(-5deg);
-            margin: 0 auto;
-          }
-    
-          .custom-image2 {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-            transform: rotate(20deg);
-            margin-top: -200px; /* Adjust the margin-top to overlap the images */
-            position: relative;
-            z-index: 2; /* Ensure the second image is on top */
-          }
+    .custom-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+  
+      .custom-col {
+        flex: 0 0 50%;
+        padding: 20px;
+        text-align: center;
+  
+        .custom-image1 {
+          max-width: 100%;
+          height: auto;
+          display: block;
+          transform: rotate(-5deg);
+          margin: 0 auto;
         }
-    
-        .custom-text-light {
-          color: white;
-          font-size: 2rem;
-        }
-    
-        .custom-yellow-head {
-          font-size: 2.5rem;
-          padding: 20px 0;
-        }
-    
-        .custom-yellow-head1 {
-          font-size: 1.5rem;
-          padding: 10px 0;
+  
+        .custom-image2 {
+          max-width: 100%;
+          height: auto;
+          display: block;
+          margin: 0 auto;
+          transform: rotate(20deg);
+          margin-top: -200px; /* Adjust the margin-top to overlap the images */
+          position: relative;
+          z-index: 2; /* Ensure the second image is on top */
         }
       }
-    }
-    
-
-    .custom-forth-div {
-      background-color: #45969b;
-      padding: 20px;
-
+  
       .custom-text-light {
         color: white;
+        font-size: 2rem;
       }
-
-      .custom-yellow-head2 {
+  
+      .custom-yellow-head {
         font-size: 2.5rem;
         padding: 20px 0;
       }
-
-      .custom-yellow-head3 {
+  
+      .custom-yellow-head1 {
         font-size: 1.5rem;
         padding: 10px 0;
       }
+    }
+
+    .custom-second-div {
+      background-color: #45969b;
+      padding: 20px;
+      position: relative;
+    
+     
     }
   }
 }

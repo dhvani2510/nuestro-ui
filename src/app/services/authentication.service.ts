@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
+import { Route, Router } from '@angular/router';
 
 ;;
 class User {
@@ -49,7 +50,7 @@ export class AuthenticationService {
     return this.userLoggedInSubject.value;
   }
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private router:Router) {
   const storedToken = localStorage.getItem('token');
   const storedUser = localStorage.getItem('user');
 
@@ -79,8 +80,9 @@ export class AuthenticationService {
   logoutService() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('auth');
     this.setUserLoggedIn(false);
-    
+    this.router.navigate(['/']);
   }  
 
   setToken(token: string | null): void {    

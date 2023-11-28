@@ -1,50 +1,62 @@
 <div class="background1">
-  <div class="custom-header">
-    <a href="/" class="custom-icon" title="Go to Homepage">
-      <i class="material-icons text-light">home</i>Go back to Home page 
-    </a>
+  <div class="text-right p-3">
+    <abbr title="Go to Homepage">
+      <a href="/" class="custom-icon" title="Go to Homepage">
+        <i class="material-icons text-light">home</i>
+        <span class="icon-text">Go back to Home page</span>
+      </a>
+    </abbr>
   </div>
-  <div class="login-container">
-    <div class="hello">Hello!</div>
-    <div class="input-group">
-      <input
-        type="text"
-        class="custom-input"
-        id="email"
-        placeholder="&#xf0e0; Email" 
-        [(ngModel)]="email"
-        [ngModelOptions]="{ standalone: true }"
-      />
+
+  <div class="custom-row">
+    <div class="custom-col">
+      <div class="text-center text-light heading font-weight-bold">
+        Nuestro
+      </div>
+      <div class="text-center text-light signup">SIGN IN</div>
     </div>
-    <div class="input-group">
-      <input
-        id="password"
-        type="password"
-        class="custom-input"
-        placeholder="&#xf084; Password"
-        [(ngModel)]="password"
-        [ngModelOptions]="{ standalone: true }"
-      />
-    </div>
-    <div *ngIf="!validateUser" class="custom-alert">
-      <button type="button" class="custom-close" (click)="closeAlert()">&times;</button>
-      <strong>Username and password can't be recognized!</strong>
-    </div>
-    <!-- <div class="checkbox-container">
-      <input type="checkbox" id="showPassword" (click)="showPasswordFunction()" />
-      <label class="checkbox-label" for="showPassword">Show Password</label>
-    </div> -->
-    <div class="text-center">
-      <button class="custom-btn" (click)="forget()">Forgot Password?</button>
-    </div>
-    <div class="button-container">
-      <button type="button" class="custom-btn" (click)="login()">
-        <span class="custom-font-weight">LOG IN</span>
-      </button>
-    </div>
-    <div class="border-top pt-3">
-      <div class="text-center text-muted">
-        Don't have an account? <a href="/signup">Sign Up</a>
+    <div class="custom-col pt-5">
+      <div class="custom-container size bg-light custom-scroll login-container">
+        <div class="hello">Hello!</div>
+        <div class="input-group">
+          <input
+            type="text"
+            class="custom-input"
+            id="email"
+            placeholder="Email" 
+            [(ngModel)]="email"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+        <div class="input-group">
+          <!-- <i class="material-icons">vpn_key</i> -->
+          <input
+            id="password"
+            type="password"
+            class="custom-input"
+            placeholder="Password"
+            [(ngModel)]="password"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+        <div class="checkbox-container">
+          <input type="checkbox" id="showPassword" (change)="togglePasswordVisibility()" />
+          <label class="checkbox-label" for="showPassword">Show Password</label>
+        </div>
+        <div *ngIf="!validateUser" class="custom-alert">
+          <button type="button" class="custom-close" (click)="closeAlert()">&times;</button>
+          <strong>Username and password can't be recognized!</strong>
+        </div>
+        <div class="forget" (click)="forget()">Forgot Password? Reset </div>
+        <div class="button-container">
+          <button type="button" class="custom-btn" (click)="login()">Sign In</button>
+        </div>
+
+        <div class="border-top pt-3">
+          <div class="text-center text-muted">
+            Don't have an account? <a href="/signup">Sign Up</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>

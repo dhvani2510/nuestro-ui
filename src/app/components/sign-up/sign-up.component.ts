@@ -26,8 +26,8 @@ export class SignUpComponent implements OnInit {
   email: string = '';
   password: string = '';
 
-  url = "http://localhost:8081/api/v1/auth/";
-  // url = "https://nuestro.iverique.com/api/v1/auth/";
+  // url = "http://localhost:8081/api/v1/auth/";
+  url = "https://nuestro.iverique.com/api/v1/auth/";
 
 
   alert = false;
@@ -70,7 +70,7 @@ export class SignUpComponent implements OnInit {
         this.alert = true;
         setTimeout(() => {
           this.router.navigate(['/login']);
-        }, 5000);
+        }, 3000);
       }
     }, 
     (error:any) => {

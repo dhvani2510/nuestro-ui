@@ -2,33 +2,6 @@
   <div class="container">
     <form #blogEditForm="ngForm" (ngSubmit)="editBlog(this.blogId)">
       <div class="form-group pl-5 pr-5">
-        <label class="font-weight-bold text-dark size">Title</label>
-        <input
-          name="title"
-          type="text"
-          class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && blogEditForm.controls['title'].errors }"
-          [value]="title"
-          [(ngModel)]="title"
-        />
-        <div *ngIf="submitted && blogEditForm.controls['title'].errors" class="invalid-feedback">
-          <div *ngIf="blogEditForm.controls['title'].hasError('required')">Title is required</div>
-        </div>
-      </div>
-      <div class="form-group pl-5 pr-5">
-        <label class="font-weight-bold text-dark size">Category</label>
-        <input
-          name="category"
-          type="text"
-          class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && blogEditForm.controls['category'].errors }"
-          [(ngModel)]="category"
-        />
-        <div *ngIf="submitted && blogEditForm.controls['category'].errors" class="invalid-feedback">
-          <div *ngIf="blogEditForm.controls['category'].hasError('required')">Ctaegory is required</div>
-        </div>
-      </div>
-      <div class="form-group pl-5 pr-5">
         <label class="font-weight-bold text-dark size">Content</label>
         <textarea
           type="text"
@@ -46,5 +19,22 @@
         <button class="btn btn-info rounded-0 width">Save changes</button>
       </div>
     </form>
+  </div>
+</div>
+<div class="custom-alert-popup" *ngIf="alert">
+  <div class="custom-popup-content success">
+   <i class="material-icons text-success">done</i>
+   <strong>Post Updated Successfully!</strong>
+  <button (click)="closeSuccessAlert()" class="custom-close-button">Close</button>
+  </div>
+</div>
+
+<div class="custom-alert-popup" *ngIf="errorAlert">
+  <div class="custom-popup-content error">
+    <div>
+      <i class="material-icons text-danger">error</i>
+    <strong>Something went wrong</strong>
+    </div>
+    <button (click)="closeErrorAlert()" class="custom-close-button">Close</button>
   </div>
 </div>

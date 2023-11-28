@@ -2,11 +2,8 @@
   <div class="container-fluid">
     <div class="container">
       <div class="row pt-5">
-        <div class="col-sm-3 border-right link1">
-          <div class="pt-5 font-weight-bold link pb-3 text-dark">
-            <div (click)="myblogs()">Show Posts</div>
-          </div>
-          <div class="pt-4 font-weight-bold link pb-3 text-dark">
+        <div *ngIf="superAccess" class="col-sm-3 border-right link1">
+          <div  class="pt-4 font-weight-bold link pb-3 text-dark">
             <a data-toggle="modal" data-target="#myModal"> Edit Profile </a>
           </div>
           <div class="pt-4 font-weight-bold link pb-3 text-dark">
@@ -16,88 +13,59 @@
             <a (click)="deactivateUser()"> Deactivate Profile </a>
           </div>
         </div>
-        <diV class="col-sm-6 pad1">
-          <div class="font-weight-bold text-dark text text-capitalize pt-5"> Name  
-            {{ firstName }} {{ lastName }} 
+        <diV class="col-sm-8 pad1">
+          <div class="font-weight-bold text-dark text text-capitalize pt-5">
+            Name {{ firstName }} {{ lastName }}
           </div>
-          <div class="pt-2 pl-4 text-dark text2">  Email: 
-            <i class="fas fa-envelope icon pr-3"></i>{{ email }}
+          <div class="pt-2 pl-4 text-dark text2">
+            Email: <i class="fas fa-envelope icon pr-3"></i>{{ email }}
           </div>
-        </diV>
-        <!-- <div class="col-sm-3">
-          <div class="col-sm-8">
-            <div class="p-5">
-              <div class="d-flex">
-                <div class="mr-5"></div>
-                <div class="mr-5" (click)="getFollowersRoute()">
-                  <h1 class="display-5 text-center a">{{ followersLength }}</h1>
-                  <div class="text-dark text-center a">Followers</div>
+          <div class="posts">
+            <div class="container d-flex line">
+              <div class="heading text-dark pt-4 pb-2">Posts-{{ array.length }}</div>
+            </div>
+          
+            <div class="row mt-5">
+              <div class="container text-muted" *ngIf="array.length == 0">
+                <div
+                  class="d-flex justify-content-center font-weight-bold text-dark empty mt-5 error"
+                >
+                  There are no Posts!
                 </div>
-                <div>
-                  <h1
-                    class="display-5 text-center a"
-                    (click)="getFollowingRoute()"
+                <div class="text-center mt-5">
+                  <button
+                    type="button"
+                    class="btn btn-info rounded-0 width borders"
+                    (click)="addBlog()"
                   >
-                    {{ followingLength }}
-                  </h1>
-                  <div class="text-dark text-center a">Following</div>
+                    Add Post
+                  </button>
                 </div>
               </div>
 
-              <div class="text-center btn1" *ngIf="!superAccess">
-                <button
-                  type="button"
-                  class="btn btn-dark rounded-0 p-2 mt-5"
-                  style="width: 100px"
-                  id="followButton"
-                  (click)="follow()"
-                >
-                  Follow
-                </button>
-              </div>
-              <div
-                *ngIf="superAccess && requests.length != 0"
-                class="dropdown text-center"
-              >
-                <button
-                  type="button"
-                  class="btn btn-warning rounded-0 p-2 mt-5 ml-5"
-                  style="width: 200px"
-                  data-toggle="dropdown"
-                >
-                  Show Requests
-                </button>
-                <div class="dropdown-menu request-dropdown">
-                  <div *ngFor="let i of requests">
-                    <div class="p-2 border d-flex">
-                      <div class="mr-4">
-                        <div>{{ i.userWhoSentRequest.username }}</div>
-                      </div>
-                      <div>
-                        <button
-                          type="button"
-                          class="btn btn-success rounded-0"
-                          (click)="acceptRequest(i.userWhoSentRequest.id)"
-                        >
-                          Accept
-                        </button>
-                      </div>
-                      <div>
-                        <button
-                          type="button"
-                          class="btn btn-danger rounded-0"
-                          (click)="rejectRequest(i.userWhoSentRequest.id)"
-                        >
-                          Reject
-                        </button>
+              <div *ngFor="let i of array; let ind = index" class="col-md-6 mb-4">
+                <div class="custom-container custom-padding custom-border-bottom">
+                  <div class="custom-row">
+                    <div class="col">
+                      <div class="descrip pt-2" [innerHTML]="truncateContent(i.content, 2)"></div>        
+                      <div *ngIf="i.content.split('\n').length > 2">
+                        <a [routerLink]="'/completeBlog/' + i.id" class="read-more-link text-muted">Read More</a>
                       </div>
                     </div>
                   </div>
+                  <div *ngIf="superAccess" class="custom-row">
+                    <button type="button" class="btn rounded-2 col-sm-4" (click)="updatePost(i.id)">
+                      Update Post
+                    </button>
+                    <button type="button" class="btn rounded-2 col-sm-4" (click)="deleteBlog(i.id)">
+                      Delete Post
+                    </button>
+                  </div>
                 </div>
-              </div>
+              </div>       
             </div>
           </div>
-        </div> -->
+        </diV>
       </div>
     </div>
   </div>
@@ -105,7 +73,6 @@
   <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
-        <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title modalhead border-bottom">Edit Profile</h4>
           <button type="button" class="close" data-dismiss="modal">
@@ -113,7 +80,6 @@
           </button>
         </div>
 
-        <!-- Modal body -->
         <div class="modal-body">
           <form (ngSubmit)="editUser()" #registerForm="ngForm">
             <div class="custom-input-group mb-4 custom-input">
@@ -145,10 +111,9 @@
                 name="email"
                 class="custom-input-control"
                 placeholder="Email"
-                required
+                disabled="true"
               />
             </div>
-            <a data-toggle="modal" data-target="#myModal1"> change Password </a>
             <div class="form-group d-flex justify-content-center">
               <button class="btn addbtn">Save Changes</button>
             </div>
@@ -163,7 +128,9 @@
       <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title modalhead border-bottom">Database Connection</h4>
+          <h4 class="modal-title modalhead border-bottom">
+            Database Connection
+          </h4>
           <button type="button" class="close" data-dismiss="modal">
             &times;
           </button>
@@ -182,7 +149,7 @@
                 required
               />
             </div>
-        
+
             <div class="custom-input-group mb-4 custom-input">
               <input
                 type="text"
@@ -193,7 +160,7 @@
                 required
               />
             </div>
-        
+
             <div class="custom-input-group mb-4 custom-input">
               <input
                 type="number"
@@ -204,7 +171,7 @@
                 required
               />
             </div>
-        
+
             <div class="custom-input-group mb-4 custom-input">
               <input
                 type="text"
@@ -215,7 +182,7 @@
                 required
               />
             </div>
-        
+
             <div class="custom-input-group mb-4 custom-input">
               <input
                 type="password"
@@ -226,7 +193,7 @@
                 required
               />
             </div>
-        
+
             <div class="custom-input-group mb-4 custom-input">
               <select
                 [(ngModel)]="databaseType"
@@ -238,68 +205,50 @@
                 <option value="MONGODB">MongoDB</option>
                 <option value="MSSQL">SQL Server</option>
               </select>
-            </div>        
+            </div>
             <div class="form-group d-flex justify-content-center">
-              <button class="btn addbtn" [disabled]="!databaseForm.valid">Save Changes</button>
+              <button class="btn addbtn" [disabled]="!databaseForm.valid">
+                Save Changes
+              </button>
             </div>
           </form>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <div class="modal fade" id="myModal1" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title text-muted edit">CHANGE PASSWORD</h4>
-        </div>
-        <div class="modal-body">
-          <div>
-            <div class="change1 text-muted pl-5 pt-4">Old Password *</div>
-            <input
-              type="password"
-              class="inputs pt-3"
-              [(ngModel)]="oldpassword"
-              required
-            />
-          </div>
-          <div>
-            <div class="change1 text-muted pl-5 pt-4">New Password *</div>
-            <input
-              type="password"
-              class="inputs pt-3"
-              [(ngModel)]="newpassword"
-              minlength="6"
-              required
-            />
-          </div>
-          <div>
-            <div class="change1 text-muted pl-5 pt-4">
-              Confirm New Password *
-            </div>
-            <input
-              type="password"
-              class="inputs pt-3"
-              [(ngModel)]="confirmpassword"
-              minlength="6"
-              required
-            />
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-default"
-            (click)="changePassword()"
-          >
-            Save
-          </button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">
-            Close
-          </button>
-        </div>
-      </div>
+
+<div class="custom-alert-popup" *ngIf="alert">
+  <div class="custom-popup-content success">
+   <i class="material-icons text-success">done</i>
+   <strong>{{alertMessage}}</strong>
+  </div>
+</div>
+
+<!-- Custom Error Alert Popup -->
+<div class="custom-alert-popup" *ngIf="alertError">
+  <div class="custom-popup-content error">
+    <div>
+      <i class="material-icons text-danger">error</i>
+    <strong>{{alertErrorMessage}}</strong>
+    </div>
+    <button (click)="closeErrorAlert()" class="custom-close-button">Close</button>
+  </div>
+</div>
+
+<!-- Custom Error Alert Popup -->
+<div class="custom-alert-popup" *ngIf="confirmAlert">
+  <div class="custom-popup-content error">
+    <div class="content">
+      <i class="material-icons ">info</i>
+      <strong>
+        <span>{{confirmAlerText}}</span>
+      </strong>
+    </div>
+    <div style="display: flex; justify-content: space-around;">
+      <button (click)="confirmAction(confirmButtonText)" class="custom-close-button">{{confirmButtonText}}</button>
+      <button (click)="closeConfirmAlert()" class=" custom-close-button">Cancel</button>
     </div>
   </div>
 </div>

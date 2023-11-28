@@ -20,15 +20,20 @@ export class BlogService {
   }
   getCompleteBlog(blogId: string) : Observable<any> {
     const headers = this.getHeaders();
-    return this.http.get(this.apiUrl+'getBlog/'+blogId, {headers});
+    return this.http.get(this.apiUrl+blogId, {headers});
   }
   deleteBlog(id: string) {
     const headers = this.getHeaders();
     return this.http.delete(this.apiUrl+'delete/'+id, {headers});
   }
 
-  editBlog(json: any) :Observable<any> {
+  editBlog(blogId:string,json: any) :Observable<any> {
     const headers = this.getHeaders();
-    return this.http.post(this.apiUrl+'edit',json, {headers});  
+    return this.http.put(this.apiUrl+blogId,json, {headers});  
+  }
+
+  likeBlog(id:string): Observable<any>  {
+    const headers = this.getHeaders();
+    return this.http.post(this.apiUrl + id +"/like" ,{},{headers});
   }
 }

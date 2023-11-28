@@ -66,7 +66,7 @@ export class NewblogComponent implements OnInit {
       this.success=true
         setTimeout(() => {
           this.router.navigate(['/home']);
-        },5000)
+        },3000)
     },
     (err:any) => {
       this.alert =true;

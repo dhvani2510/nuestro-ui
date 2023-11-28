@@ -19,6 +19,17 @@ export class LoginComponent implements OnInit {
     private userService: UserService
   ) {}
 
+  showPassword: boolean = false;
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+    const passwordInput = document.getElementById('password') as HTMLInputElement;
+
+    if (passwordInput) {
+      passwordInput.type = this.showPassword ? 'text' : 'password';
+    }
+  }
+
   goBack()  {
     this.router.navigate(["/"]);
   }
@@ -70,15 +81,6 @@ export class LoginComponent implements OnInit {
         console.log(error);
       }
     );
-  }
-
-  showPassword = "password";
-  showPasswordFunction() {
-    if (this.showPassword == "password") {
-      this.showPassword = "text";
-    } else {
-      this.showPassword = "password";
-    }
   }
 
   checkLogin() {

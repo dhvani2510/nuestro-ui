@@ -25,5 +25,21 @@ export class UserService {
 
   editDatabase(json: any): Observable<any> {
     const headers = this.getHeaders();
-    return this.http.post(this.apiUrl+'/database',json, {headers});  }
+    return this.http.post(this.apiUrl+'/database',json, {headers});  
+  }
+
+  updateUserProfile(json: any): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.post(this.apiUrl+'/profile', json,{headers});
+  }
+
+  getUserProfile(id:string):Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.get(`${this.apiUrl}/${id}`,{headers});
+  }
+
+  deleteUser():Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.delete(this.apiUrl, {headers});
+  }
 }
