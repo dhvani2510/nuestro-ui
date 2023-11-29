@@ -102,6 +102,7 @@ export class MainPageComponent implements OnInit {
   }
 
   async getBlogs() {
+    this.pageSize=10;
     // const url = 'http://localhost:8081/api/v1/posts';
     const url = 'https://nuestro.iverique.com/api/v1/posts';
     const headers = this.authService.addHeaders();

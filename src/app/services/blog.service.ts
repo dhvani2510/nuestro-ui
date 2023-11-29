@@ -24,7 +24,7 @@ export class BlogService {
   }
   deleteBlog(id: string) {
     const headers = this.getHeaders();
-    return this.http.delete(this.apiUrl+'delete/'+id, {headers});
+    return this.http.delete(this.apiUrl+id, {headers});
   }
 
   editBlog(blogId:string,json: any) :Observable<any> {
